@@ -1,5 +1,5 @@
-.venv\
-.vscode\
-SQLiteDatabaseBrowserPortable\
+.venv
+.vscode
+SQLiteDatabaseBrowserPortable
 TWD.db
 Keys.txt
