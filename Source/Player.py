@@ -6,6 +6,7 @@ class Player:
         self.Name = self.MemberObject.name
         self.Nickname = self.MemberObject.global_name
         self.UUID = self.MemberObject.id
+        self.Password = None
         self.Health = 20
         self.Hunger = 0
         self.Thirst = 0

@@ -1,0 +1,9 @@
+These are the startup instructions for cloud hosting on Linode or GoogleCloud
+
+screen -dm -S roc
+screen -r roc
+cd Project-RoC
+source .venv/bin/activate
+python3 RoC_Discord/RoC.py
+
+CTRL-A-D to leave safely

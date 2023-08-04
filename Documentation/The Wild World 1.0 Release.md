@@ -1,0 +1,78 @@
+Welcome to The Wild World, a Discord bot that allows you to interact with a virtual world. Players will have to tend to their players hunger, thirst, and more.
+
+# To Do
+- [x] Write Sync Script for Project Files into Markdown Documentation
+- [x] Reading of Key, and Determining Host
+- [x] Verification that this is not a test branch when launching server
+- [x] Levi Initalization
+- [x] Global Data Dictionary as Class
+- [x] Levi Bot Data -> Global Data
+- [x] Logger
+- [x] Logger Log Saving
+- [x] Global Data Dictionary In-Memory Initialization
+- [x] Global Data Dictionary Database Saving
+- [x] Global Data Dictionary Database Matching for Reloading
+- [x] Player Profile Creation on Member Join
+- [x] Player Profile Creation Logging
+- [x] Player Profile Creation by Admin
+- [x] Player Profile Password
+- [x] Player Profile Password Logging
+- [x] Player Profile Deletion
+- [x] Player Profile Deletion Logging
+- [x] Player Profile Reset
+- [x] Player Profile Reset Logging
+- [ ] Player Profile Customization
+- [ ] Player Profile Customization Logging
+- [ ] Player Profile Statistics
+- [ ] Player Profile Panel
+- [ ] Player Panel Creation
+- [ ] Player Panel Creation Logging
+- [ ] Player Panel Security
+- [ ] Player Panel Security Logging
+- [ ] Player Panel Deletion Upon Creation of a New One
+- [ ] Player Panel Deletion Logging
+- [ ] Player Job Permits
+- [ ] Player Job Permit Buying
+- [ ] Player Job Permit Buy Logging
+- [ ] Player Job Permit Data Saving
+- [ ] Player Job Permit Data Loading
+- [ ] Player Inventory Data Saving
+- [ ] Player Inventory Data Loading
+- [ ] Object Patent Panel
+- [ ] Object Patent Panel Collection
+- [ ] Object Patent Panel Request Submitting
+- [ ] Object Patent Panel Logging
+- [ ] Work Panel
+- [ ] Work Panel Selection
+- [ ] Work Button
+- [ ] Work Button Logging
+- [ ] Player Profile Panel -> Inventory Panel
+- [ ] Player Market Panel
+- [ ] Player Market Selling, The Hold always buys things
+- [ ] Player Market Buying, The Hold has a rotating stock of items being sold
+- [ ] Player Hunger, goes down when you work, or do actions, goes up while resting
+- [ ] Player Eating
+- [ ] Player Thirst, goes down when you work or do actions, goes up while resting
+- [ ] Player Drinking
+- [x] Clear Logs Command
+
+### Feature List:
+- [ ] Player Profiles
+- [ ] Working
+	- [ ] Growing Apples
+	- [ ] Chopping Trees
+	- [ ] Fishing
+	- [ ] Crafting
+	- [ ] Cooking
+- [ ] Hunger
+- [ ] Eating
+- [ ] Thirst
+- [ ] Drinking
+- [ ] Fatigue
+- [ ] Sleeping
+- [ ] Family
+- [ ] Pets
+- [ ] Business
+- [ ] Stock Market
+- [ ] Object Patenting
+	- Players can implement new items into the game by making requests that will be approved or denied by developers. These will be called Object Patents in-game. So if something doesn't exist in the game that you want to make business of, you can simply submit a patent for it.

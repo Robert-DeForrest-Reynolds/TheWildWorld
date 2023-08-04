@@ -14,7 +14,7 @@ from Gameplay.HouseholdPanel import HouseholdPanel
 class PlayPanel:
     def __init__(self, Context, GlobalData):
         self.Context = Context
-        self.Player = GlobalData.LeviMembers[Context.author.name]
+        self.Player = GlobalData.FoundMembers[Context.author.name]
         self.GlobalDataRef = GlobalData
         create_task(self.Construct_Panel())
 
