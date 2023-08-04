@@ -10,8 +10,6 @@ from time import strftime
 
 from sys import argv
 
-# Test Pull
-
 Logger = logging.getLogger('discord')
 Logger.setLevel(logging.DEBUG)
 logging.getLogger('discord.http').setLevel(logging.INFO)
