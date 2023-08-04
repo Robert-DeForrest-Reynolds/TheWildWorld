@@ -1,6 +1,7 @@
 [[Discord Bot]]
 [[DeForrest Studios]]
 [[The Wild World Panels]]
+[[The Wild World Developer Operations]]
 
 # Systems
 [[The Wild World Pets]]
@@ -14,6 +15,7 @@
 [[The Wild World Stock Market]]
 [[The Wild World Government]]
 [[The Wild World Working]]
+[[The Wild World Object Patents]]
 
 # Levi
 Levi is the bot that players interact with to navigate, and do things within the The Wild World. I want to flesh out more story about the world, and who Levi is and whatnot.
