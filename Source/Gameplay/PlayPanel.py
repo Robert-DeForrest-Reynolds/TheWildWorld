@@ -33,28 +33,28 @@ class PlayPanel:
         ]
         
         self.Selection = Select(placeholder="Panel Selection", options=self.SelectionOptions)
-        self.Selection.callback = lambda ButtonInteraction: create_task(self.Construct_New_Panel(ButtonInteraction.data["values"][0], ButtonInteraction))
+        self.Selection.callback = lambda SelectInteraction: create_task(self.Construct_New_Panel(SelectInteraction.data["values"][0], SelectInteraction))
         self.BaseViewFrame.add_item(self.Selection)
         
         await self.Context.send(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
-    async def Construct_New_Panel(self, PanelSelection, ButtonInteraction):
+    async def Construct_New_Panel(self, PanelSelection, SelectInteraction):
         if PanelSelection == "Profile":
-            ProfilePanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            ProfilePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Work":
-            WorkPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            WorkPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Pets":
-            PetsPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            PetsPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Market":
-            MarketPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            MarketPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Office":
-            OfficePanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            OfficePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Stocks":
-            StocksPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            StocksPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "The Hold":
-            HoldPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            HoldPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
         if PanelSelection == "Household":
-            HouseholdPanel(self.Context, self.Player, ButtonInteraction, self, self.GlobalDataRef)
+            HouseholdPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
 
     async def Reset(self, ButtonInteraction):
         if ButtonInteraction.user == self.Context.author:
