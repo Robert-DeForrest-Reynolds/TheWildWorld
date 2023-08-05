@@ -2,15 +2,22 @@ from asyncio import create_task
 
 class Player:
     def __init__(self, Member):
-        self.MemberObject = Member
-        self.Name = self.MemberObject.name
-        self.Nickname = self.MemberObject.global_name
-        self.UUID = self.MemberObject.id
-        self.Password = None
-        self.Health = 20
-        self.Hunger = 0
-        self.Thirst = 0
-        self.Sanity = 100
-        self.Morale = 500
-        self.Age = 1
-        self.Jobs = []
+        self.Profile = {
+            "Member Object": Member,
+            "Username": Member.name,
+            "Nickname": None,
+            "UUID": Member.id,
+            "Password": None,
+            "Health": 20,
+            "Hunger": 0,
+            "Thirst": 0,
+            "Sanity": 100,
+            "Morale": 500,
+            "Age": 1,
+            "Jobs": {}
+        }
+
+        if self.Profile["Member Object"].global_name != None:
+            self.Profile["Nickname"] = self.Profile["Member Object"].global_name
+        else:
+            self.Profile["Nickname"] = self.Profile["Member Object"].name

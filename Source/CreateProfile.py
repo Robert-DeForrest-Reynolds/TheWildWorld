@@ -21,20 +21,20 @@ LeviPassword = ("One more thing! I'll need you to make a password now for your a
 async def CreateProfile(Member, GlobalData, Logger):
     async def Set_Password(ModalInteraction, SelectedWork):
         Password = ModalInteraction.data['components'][0]['components'][0]['value']
-        NewPlayer.Password = Password
+        NewPlayer.Profile["Password"] = Password
         ResponseDictionary = {"Grow Apples": "I can't wait to taste some of those apples!",
                               "Chop Trees": "You should sell some of that lumber to Harold!",
                               "Mine Coal": "Mining coal? Man, I hope your back is strong!"}
-        Logger.info(f"Created a profile.\nName:{NewPlayer.Name}, SelectedWork:{SelectedWork}, Password:{Password}")
+        Logger.info(f"Created a profile.\nName:{NewPlayer.Profile['Username']}, SelectedWork:{SelectedWork}, Password:{Password}")
         Cursor = GlobalData.LeviDatabase.Generate_Cursor()
-        Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password) VALUES(?, ?, ?, ?)",
-                                               (NewPlayer.UUID, NewPlayer.Name, NewPlayer.Nickname, NewPlayer.Password))
+        Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password, Jobs) VALUES(?, ?, ?, ?, ?)",
+                                               (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Profile["Password"], f"{SelectedWork}"))
         GlobalData.LeviDatabase.TWDCONNECTION.commit()
         Cursor.close()
         await ModalInteraction.response.send_message(f"Alright then! You've set your password to '{Password}'. {ResponseDictionary[SelectedWork]} I wish you the best of luck on your adventures! We'll talk more soon I'm sure.")
     async def Select_Work(ButtonInteraction):
         SelectedWork = ButtonInteraction.data["custom_id"]
-        NewPlayer.Jobs.append(JobsSelector[SelectedWork]())
+        NewPlayer.Profile["Jobs"].update({JobsSelector[SelectedWork](): "JOB OBJECT"})
         PasswordModal = Modal(title="Set Password")
         PasswordInput = TextInput(label="Please enter a password")
         PasswordModal.on_submit = lambda ModalInteraction: Set_Password(ModalInteraction, SelectedWork)
@@ -52,5 +52,6 @@ async def CreateProfile(Member, GlobalData, Logger):
     ChoppingButton.callback = Select_Work
     MiningButton.callback = Select_Work
     NewPlayer = Player(Member)
-    GlobalData.FoundMembers[NewPlayer.Name] = NewPlayer
+    GlobalData.FoundMembers[NewPlayer.Profile["UUID"]] = NewPlayer
+    GlobalData.Players.update({NewPlayer.Profile["UUID"]:NewPlayer})
     await Member.send(LeviIntroduction, view=ViewFrame)

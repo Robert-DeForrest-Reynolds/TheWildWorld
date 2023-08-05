@@ -1,3 +1,4 @@
+Object Patents are a feature of the game that allows players to request for objects to be incepted into the game. Object Patents are formatted as so, and *every* item in the game requires an Object Patent, even ones introduced by developers.
 ### Object Name
 ---
 `Object Creation`

@@ -13,8 +13,10 @@ class ProfilePanel:
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Nickname}'s Profile Panel", description=f"aka {self.Player.Name}")
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Username']}'s Profile Panel", description=f"aka {self.Player.Profile['Username']}")
     
+        self.EmbedFrame.add_field(name="Health", value=self.Player.Profile["Health"])
+
         self.PlayPanelReturnButton = Button(label="Return to Play Panel", style=ButtonStyle.red)
 
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset

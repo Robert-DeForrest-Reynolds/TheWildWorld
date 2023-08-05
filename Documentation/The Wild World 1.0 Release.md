@@ -21,6 +21,7 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [x] Player Profile Deletion Logging
 - [x] Player Profile Reset
 - [x] Player Profile Reset Logging
+- [x] Player Profile In-Memory Reloading
 - [ ] Player Profile Customization
 - [ ] Player Profile Customization Logging
 - [ ] Player Profile Statistics

@@ -17,6 +17,11 @@
 [[The Wild World Working]]
 [[The Wild World Object Patents]]
 
+[Levi Explanation](#Levi)
+
+## Player Profile Creation
+Player profiles can be created two ways, when a member joins the discord server while the bot is online, and when an admin uses the command on a discord profile.
+
 # Levi
 Levi is the bot that players interact with to navigate, and do things within the The Wild World. I want to flesh out more story about the world, and who Levi is and whatnot.
 
@@ -43,10 +48,6 @@ Players will be able to buy property. That property can have pre-existing houses
 Players trade products, and their value will rise or fall in the market.
 
 Players have hunger, thirst, energy, sanity, and age.
-
-# Object Patents
-Object Patents are a feature of the game that allows players to request for objects to be incepted into the game. Object Patents are formatted as so, and *every* item in the game requires an Object Patent, even ones introduced by developers.
-[[The Wild World Object Patents]]
 
 # Discord Server
 There are 3 Discord servers for The Wild World, and at least 3 bots respectively.

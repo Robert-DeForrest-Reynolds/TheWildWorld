@@ -14,13 +14,13 @@ from Gameplay.HouseholdPanel import HouseholdPanel
 class PlayPanel:
     def __init__(self, Context, GlobalData):
         self.Context = Context
-        self.Player = GlobalData.FoundMembers[Context.author.name]
+        self.Player = GlobalData.Players[Context.author.id]
         self.GlobalDataRef = GlobalData
         create_task(self.Construct_Panel())
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Nickname}'s Main Panel", description=f"aka {self.Player.Name}")
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Main Panel", description=f"aka {self.Player.Profile['Username']}")
         
         self.SelectionOptions = [SelectOption(label="Profile", description="See Character Stats & More"),
                                  SelectOption(label="Work", description="Get to work!"),

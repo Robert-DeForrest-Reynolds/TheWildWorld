@@ -26,9 +26,10 @@ Logger.addHandler(Handler)
 
 class GD: # Global Data
     def __init__(self):
-        self.FoundsGuilds = {}
+        self.Guilds = []
         self.FoundMembers = {}
         self.LeviDatabase = None
+        self.Players = {}
         self.Key = None
         self.KeyType = None
         self.Debug = False
@@ -60,41 +61,52 @@ async def on_member_join(Member):
 async def on_ready():
     if GlobalData.Debug == True:
         for Guild in Levi.guilds:
-            GlobalData.FoundsGuilds.update({str(Guild):Guild})
-        for Member in GlobalData.FoundsGuilds["The Wild World - Dev Server"].members:
+            GlobalData.Guilds.append(Guild)
+        for Member in GlobalData.Guilds[0].members:
             GlobalData.FoundMembers.update({Member.name: Player(Member)})
         GlobalData.LeviDatabase = TWD(GlobalData)
     if GlobalData.Unstable == True:
         for Guild in Levi.guilds:
-            GlobalData.FoundsGuilds.update({str(Guild):Guild})
-        for Member in GlobalData.FoundsGuilds["The Wild World - Unstable"].members:
+            GlobalData.Guilds.append(Guild)
+        for Member in GlobalData.Guilds[0].members:
             GlobalData.FoundMembers.update({Member.name: Player(Member)})
         GlobalData.LeviDatabase = TWD(GlobalData)
     if GlobalData.Debug == False and GlobalData.Unstable == False:
         for Guild in Levi.guilds:
-            GlobalData.FoundsGuilds.update({str(Guild):Guild})
-        for Member in GlobalData.FoundsGuilds["The Wild World"].members:
+            GlobalData.Guilds.append(Guild)
+        for Member in GlobalData.Guilds[0].members:
             GlobalData.FoundMembers.update({Member.name: Player(Member)})
         GlobalData.LeviDatabase = TWD(GlobalData)
+
+    GlobalData.Players = GlobalData.LeviDatabase.Load_Players(GlobalData)
+    print(GlobalData.Players)
 
     GlobalData.LeviDatabase.Save_Global_Data(GlobalData)
 
 @Levi.command(aliases=["WW", "ww", "wW", "Ww"])
 async def Play_Command(Context):
-    PlayPanel(Context, GlobalData)
+    print(Context.author.id)
+    if Context.author.id in list(GlobalData.Players.keys()):
+        Logger.info(f"{Context.author} called for a panel")
+        PlayPanel(Context, GlobalData)
+    else:
+        Logger.info(f"{Context.author} called for a panel, but broke something. Fuckin' hell.")
+        await Context.send("You do not have a profile yet. Stop breaking stuff. How did this even happen?")
 
 
 @Levi.command("create_profile")
 @commands.has_permissions(administrator=True)
 async def Admin_Create_Profile(Context):
-    Member = GlobalData.FoundMembers[Context.author.name].MemberObject
+    Member = GlobalData.FoundMembers[Context.author.name].Profile["Member Object"]
     await CreateProfile(Member, GlobalData, Logger)
 
 @Levi.command("delete_profile")
 @commands.has_permissions(administrator=True)
 async def Delete_Profile(Context, GivenUsername):
-    GlobalData.LeviDatabase.Cursor.execute(f"DELETE FROM Players WHERE Username='{GivenUsername}'")
+    Cursor = GlobalData.LeviDatabase.Generate_Cursor()
+    Cursor.execute(f"DELETE FROM Players WHERE Username='{GivenUsername}'")
     GlobalData.LeviDatabase.TWDCONNECTION.commit()
+    Cursor.close()
     Logger.info(f"Attempted to delete {GivenUsername}'s profile")
     if GivenUsername in GlobalData.LeviDatabase.Cursor.execute(f"SELECT Username FROM Players WHERE Username='{GivenUsername}'").fetchall()[0]:
         Logger.info(f"Successfully deleted {GivenUsername}'s profile")
