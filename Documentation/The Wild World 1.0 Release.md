@@ -56,6 +56,23 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Player Drinking
 - [x] Clear Logs Command
 
+I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put, what is expected for 1.0 release is something functional that is still what you'd deem playable, with a gameplay loop. I'll start by adding a few things, and let you go from there. I recommend making a good list for you to tackle, and then adding more, and tackling them in groups. Anything put on this list will be expected in the 1.0 release. If there are things you do not think can be implemented timely, that aren't required for the core gameplay loop, just put them here: [[The Wild World Pets]], and focus on the 1.0 release. Word should be concise, but not necessarily vague, I just tend to be vague. You can word them however you'd like.
+
+### Pets
+- [ ] Pets, Conceptualize Programmatic Architecture
+- [ ] Pets Panel Action Selection
+- [ ] Pets Panel My Pets Menu
+- [ ] Pets Panel My Pets, Pet Profiles
+- [ ] Pets Panel Bait Menu
+- [ ] Pets Panel Bait Menu, Bait Selection
+- [ ] Pets Panel Bait Menu, Use Bait
+- [ ] Pets Panel Bait Menu, Use Bait Logging
+- [ ] Pets Panel Bait Menu, Catching
+- [ ] Pets Panel Bait Menu, Catching Logging
+- [ ] Pets Panel Bait Menu, Catching, Name Creature
+
+(Instead of a bait menu, create a catching menu with bait and taming options. First you have to bait a creature by placing down an enclosure with a specific tier of bait, then you have to perform an action to tame the trapped creature. After you have tamed the creature you can then name it and begin building a relationship with it. Once you reach a certain level of relationship with the creature, you can start to train it for battles.)
+
 ### Feature List:
 - [ ] Player Profiles
 - [ ] Working
