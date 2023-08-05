@@ -40,17 +40,25 @@ GlobalData = GD()
 GlobalData.Key = argv[1]
 GlobalData.KeyType = argv[2]
 
-if GlobalData.KeyType == "testing":
-    GlobalData.Debug = True
-    GlobalData.Unstable = False
-elif GlobalData.KeyType == "unstable":
-    GlobalData.Debug = True
-    GlobalData.Unstable = True
 
 intents = Intents.all()
 intents.members = True
 Levi = commands.Bot(command_prefix=['T', 't'], intents=intents)
 
+if GlobalData.KeyType in ["lani", "robert"]:
+    if GlobalData.KeyType == "lani":
+        Levi.command_prefix = "-"
+    if GlobalData.KeyType == "robert":
+        Levi.command_prefix = ">"
+    GlobalData.Debug = True
+    GlobalData.Unstable = False
+elif GlobalData.KeyType == "unstable":
+    GlobalData.Debug = True
+    GlobalData.Unstable = True
+elif GlobalData.KeyType == "official":
+    Levi.command_prefix = ["T", "t"]
+
+print(f"Command Prefix: {Levi.command_prefix}")
 
 @Levi.event
 async def on_member_join(Member):
