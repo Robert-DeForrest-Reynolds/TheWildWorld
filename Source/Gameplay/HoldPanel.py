@@ -3,11 +3,11 @@ from discord.ui import View, Button
 from asyncio import create_task
 
 class HoldPanel:
-    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalDataRef):
+    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         self.Context = Context
         self.Player = Player
         self.GivenInteraction = GivenInteraction
-        self.GlobalDataRef = GlobalDataRef
+        self.GlobalData = GlobalData
         self.PlayerPlayPanel = PlayerPlayPanel
         create_task(self.Construct_Panel())
 

@@ -28,15 +28,42 @@ class Coraloin:
 
 ### Brain Vomit
 
-Pets are not used for goods, only for battles. When a pet dies, the fade away into dust. Creatures come from a monument with multiple doorways to our universe that lead to other universes full of their own life forms. 
+Pets are not used for goods, only for battles. When a pet dies, the fade away into dust. Creatures come from multiple doorways to our universe that lead to other universes full of their own life forms.  We can only survive temporarily in their universes but the creatures can sustain in ours.
 
 Tiered pets caught using bait and enclosures that are crafted or bought. You can use a tier 1 bait on a water enclosure to catch specific types of creatures. 
+
+### Creature Collecting
+-  Open creature collecting menu
+	- Craft bait
+		- 1-5 tiers
+	- Buy bait
+	- Craft enclosure
+		- List of different types of enclosures
+	- Buy enclosure
+	- Place trap
+		- Choose enclosure
+		- Choose bait
+	- Check traps
+		- List of traps and whether or not they have caught something
+			- Either say "Empty" or "Creature Caught"
+
+### Creature Sanctuary
+- Build relationships (Tame)
+- Tend to pets
 
 ### Enclosure Types
 Nets
 Aquatic nets
 Cages
 Special Enclosures
+
+### Creature Rarities
+Common
+Rare
+Elite
+Legendary
+Fabled
+Divine
 
 ### Pet Actions
 Can feed pets (pets can have specific diets)

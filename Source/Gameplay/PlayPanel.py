@@ -58,4 +58,4 @@ class PlayPanel:
 
     async def Reset(self, ButtonInteraction):
         if ButtonInteraction.user == self.Context.author:
-            create_task(ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame))
+            await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
