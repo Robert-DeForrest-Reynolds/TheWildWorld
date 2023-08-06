@@ -1,9 +1,9 @@
 from sqlite3 import connect
 from asyncio import create_task
 from Player import Player
-from Work.GrowApples import GrowApples
-from Work.ChopTrees import ChopTrees
-from Work.MineCoal import MineCoal
+from Jobs.GrowApples import GrowApples
+from Jobs.ChopTrees import ChopTrees
+from Jobs.MineCoal import MineCoal
 
 PLAYER_TABLE = """\
 UUID INTEGER DEFAULT 0 PRIMARY KEY,\
@@ -76,7 +76,7 @@ class TWD:
                 if Name == "Jobs":
                     Jobs = PlayerDataMapped[Name].split(",")
                     for Job in Jobs:
-                        LoadedPlayer.Profile[Name].update({Job: JobsSelector[Job]})
+                        LoadedPlayer.Profile[Name].update({Job: JobsSelector[Job]()})
             Players.update({LoadedPlayer.Profile["UUID"]:LoadedPlayer})
         self.TWDCONNECTION.commit()
         Cursor.close()

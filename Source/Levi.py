@@ -8,8 +8,6 @@ from CreateProfile import CreateProfile
 
 from sys import argv
 
-from Logger import Logger
-
 GlobalData = GD()
 
 GlobalData.Key = argv[1]
@@ -37,7 +35,7 @@ print(f"Command Prefix: {Levi.command_prefix}")
 
 @Levi.event
 async def on_member_join(Member):
-    await CreateProfile(Member, GlobalData, Logger)
+    await CreateProfile(Member, GlobalData)
 
 
 @Levi.event
@@ -69,12 +67,18 @@ async def on_ready():
 
 @Levi.command(aliases=["WW", "ww", "wW", "Ww"])
 async def Play_Command(Context):
-    print(Context.author.id)
     if Context.author.id in list(GlobalData.Players.keys()):
-        Logger.info(f"{Context.author} called for a panel")
-        PlayPanel(Context, GlobalData)
+        if GlobalData.Players[Context.author.id].PanelOn == False:
+            GlobalData.Logger.info(f"{Context.author} called for a panel")
+            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData)})
+            GlobalData.Players[Context.author.id].PanelOn = True
+        else:
+            await GlobalData.PlayerPanels[Context.author.id].Delete()
+            # del GlobalData.PlayerPanels[Context.author.id]
+            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData)})
+            GlobalData.Players[Context.author.id].PanelOn = True
     else:
-        Logger.info(f"{Context.author} called for a panel, but broke something. Fuckin' hell.")
+        GlobalData.Logger.info(f"{Context.author} called for a panel, but broke something. Fuckin' hell.")
         await Context.send("You do not have a profile yet. Stop breaking stuff. How did this even happen?")
 
 
@@ -82,7 +86,7 @@ async def Play_Command(Context):
 @commands.has_permissions(administrator=True)
 async def Admin_Create_Profile(Context):
     Member = GlobalData.FoundMembers[Context.author.name].Profile["Member Object"]
-    await CreateProfile(Member, GlobalData, Logger)
+    await CreateProfile(Member, GlobalData, GlobalData.Logger)
 
 
 @Levi.command("delete_profile")
@@ -92,14 +96,14 @@ async def Delete_Profile(Context, GivenUsername):
     Cursor.execute(f"DELETE FROM Players WHERE Username='{GivenUsername}'")
     GlobalData.LeviDatabase.TWDCONNECTION.commit()
     Cursor.close()
-    Logger.info(f"Attempted to delete {GivenUsername}'s profile")
+    GlobalData.Logger.info(f"Attempted to delete {GivenUsername}'s profile")
     if GivenUsername in GlobalData.LeviDatabase.Cursor.execute(f"SELECT Username FROM Players WHERE Username='{GivenUsername}'").fetchall()[0]:
-        Logger.info(f"Successfully deleted {GivenUsername}'s profile")
+        GlobalData.Logger.info(f"Successfully deleted {GivenUsername}'s profile")
     else:
-        Logger.info(f"Successfully deleted {GivenUsername}'s profile")
+        GlobalData.Logger.info(f"Successfully deleted {GivenUsername}'s profile")
 
 
 print(f"Running bot as {GlobalData.KeyType}")
-Logger.info(f"Running bot as {GlobalData.KeyType}")
+GlobalData.Logger.info(f"Running bot as {GlobalData.KeyType}")
 
 Levi.run(GlobalData.Key)

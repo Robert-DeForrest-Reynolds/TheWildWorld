@@ -16,6 +16,7 @@ class Player:
             "Age": 1,
             "Jobs": {}
         }
+        self.PanelOn = False
 
         if self.Profile["Member Object"].global_name != None:
             self.Profile["Nickname"] = self.Profile["Member Object"].global_name

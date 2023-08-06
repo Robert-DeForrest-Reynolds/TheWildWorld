@@ -1,9 +1,9 @@
 from discord.ui import View, Button, Modal, TextInput
 from discord import ButtonStyle
 from Player import Player
-from Work.GrowApples import GrowApples
-from Work.ChopTrees import ChopTrees
-from Work.MineCoal import MineCoal
+from Jobs.GrowApples import GrowApples
+from Jobs.ChopTrees import ChopTrees
+from Jobs.MineCoal import MineCoal
 
 JobsSelector = {"Grow Apples": GrowApples,
                 "Chop Trees": ChopTrees,
@@ -18,14 +18,14 @@ LeviIntroduction = ("Hello, my name is Levi Kiln. I'm here to introduce to you t
 LeviPassword = ("One more thing! I'll need you to make a password now for your account."+
                 "This is in case of data-transfer, and a couple other reasons.")
 
-async def CreateProfile(Member, GlobalData, Logger):
+async def CreateProfile(Member, GlobalData):
     async def Set_Password(ModalInteraction, SelectedWork):
         Password = ModalInteraction.data['components'][0]['components'][0]['value']
         NewPlayer.Profile["Password"] = Password
         ResponseDictionary = {"Grow Apples": "I can't wait to taste some of those apples!",
                               "Chop Trees": "You should sell some of that lumber to Harold!",
                               "Mine Coal": "Mining coal? Man, I hope your back is strong!"}
-        Logger.info(f"Created a profile.\nName:{NewPlayer.Profile['Username']}, SelectedWork:{SelectedWork}, Password:{Password}")
+        GlobalData.Logger.info(f"Created a profile.\nName:{NewPlayer.Profile['Username']}, SelectedWork:{SelectedWork}, Password:{Password}")
         Cursor = GlobalData.LeviDatabase.Generate_Cursor()
         Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password, Jobs) VALUES(?, ?, ?, ?, ?)",
                                                (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Profile["Password"], f"{SelectedWork}"))

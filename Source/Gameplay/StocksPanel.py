@@ -13,7 +13,7 @@ class StocksPanel:
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Nickname}'s Stocks Panel", description=f"aka {self.Player.Name}")
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Stocks Panel", description=f"aka {self.Player.Profile['Username']}")
     
         self.PlayPanelReturnButton = Button(label="Return to Play Panel", style=ButtonStyle.red)
 
