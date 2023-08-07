@@ -1,7 +1,7 @@
 from sqlite3 import connect
 from asyncio import create_task
 from Player import Player
-from Jobs.GrowApples import GrowApples
+from Jobs.HarvestApples import HarvestApples
 from Jobs.ChopTrees import ChopTrees
 from Jobs.MineCoal import MineCoal
 
@@ -19,7 +19,8 @@ Thirst INTEGER DEFAULT 0,\
 Sanity INTEGER DEFAULT 0,\
 Morale INTEGER DEFAULT 0,\
 Age INTEGER DEFAULT 0, 
-Jobs TEXT DEFAULT NONE\
+Jobs TEXT DEFAULT NONE,
+'Profile Created Date' INTEGER DEFAULT 0\
 """
 
 GLOBAL_DATA_TABLE = """\
@@ -53,14 +54,14 @@ class TWD:
         return self.TWDCONNECTION.cursor()
     
     def Load_Players(self, GlobalData):
-        JobsSelector = {"Grow Apples": GrowApples,
+        JobsSelector = {"Harvest Apples": HarvestApples,
                         "Chop Trees": ChopTrees,
                         "Mine Coal": MineCoal}
 
         PlayerDataMap = ["UUID", "Username","Nickname","Password",
                          "Experience","Level","Wallet","Health",
                          "Hunger","Thirst","Sanity", "Morale",
-                         "Age", "Jobs"]
+                         "Age", "Jobs", "Profile Created Date"]
         Players = {}
         Members = {Member.name: Member for Member in GlobalData.Guilds[0].members}
         Cursor = self.Generate_Cursor()

@@ -1,4 +1,5 @@
 from asyncio import create_task
+from time import time
 
 class Player:
     def __init__(self, Member):
@@ -14,8 +15,12 @@ class Player:
             "Sanity": 100,
             "Morale": 500,
             "Age": 1,
-            "Jobs": {}
+            "Jobs": {},
+            "Profile Created Date": int(time()),
         }
+
+        self.Inventory = {}
+        
         self.PanelOn = False
 
         if self.Profile["Member Object"].global_name != None:

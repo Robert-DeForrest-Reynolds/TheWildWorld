@@ -16,14 +16,18 @@ class PetsPanel:
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Pets Panel", description=f"aka {self.Player.Profile['Username']}")
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Pets Panel",
+                                description=f"aka {self.Player.Profile['Username']}")
         
         self.SelectionOptions = [SelectOption(label="Creature Collecting", description="Manage your containers and baits for creatures."),
                                  SelectOption(label="Creature Sanctuary", description="Interact with your creatures."),
         ]
         
-        self.Selection = Select(placeholder="Pet Actions", options=self.SelectionOptions)
-        self.PlayPanelReturnButton = Button(label="Return to Play Panel", style=ButtonStyle.red)
+        self.Selection = Select(placeholder="Pet Actions",
+                                options=self.SelectionOptions)
+        self.PlayPanelReturnButton = Button(label="Return to Play Panel",
+                                            style=ButtonStyle.red,
+                                            row=4)
 
         self.Selection.callback = self.Create_Panel
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset
@@ -37,9 +41,17 @@ class PetsPanel:
         self.SelectedPanel = SelectInteraction.data['values'][0]
         
         if self.SelectedPanel == "Creature Collecting":
-            CreatureCollectingPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
+            CreatureCollectingPanel(self.Context,
+                                    self.Player,
+                                    SelectInteraction,
+                                    self,
+                                    self.GlobalData)
         elif self.SelectedPanel == "Creature Sanctuary":
-            CreatureSanctuaryPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
+            CreatureSanctuaryPanel(self.Context,
+                                   self.Player,
+                                   SelectInteraction,
+                                   self,
+                                   self.GlobalData)
         
         
     async def Reset(self, ButtonInteraction):

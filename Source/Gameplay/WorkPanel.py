@@ -31,7 +31,8 @@ class WorkPanel:
                 self.EmbedFrame.add_field(name="You have no job.", value="You should probably go get one.")
 
         self.PlayPanelReturnButton = Button(label="Return to Play Panel",
-                                            style=ButtonStyle.red)
+                                            style=ButtonStyle.red,
+                                            row=4)
         
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset
 
@@ -40,11 +41,21 @@ class WorkPanel:
         await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Load_Selection(self, WorkSelectionInteraction):
-        WorkSelection = self.Player.Profile['Jobs'][WorkSelectionInteraction.data["values"][0]]
+        self.WorkSelection = self.Player.Profile['Jobs'][WorkSelectionInteraction.data["values"][0]]
         self.WorkSelection.placeholder = WorkSelectionInteraction.data["values"][0]
-        WorkButton = Button(label=WorkSelection, custom_id="Work Button")
-        self.BaseViewFrame.add_item(WorkButton)
-        print(self.BaseViewFrame.children)
+        WorkButton = Button(label=self.WorkSelection.Name, custom_id="Work Button")
+        WorkButton.callback = self.Work
+        if WorkButton not in self.BaseViewFrame.children:
+            self.BaseViewFrame.add_item(WorkButton)
 
-    async def Return_To_MainPanel():
-        pass
+        await WorkSelectionInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+
+    async def Work(self, ButtonInteraction):
+        Result = await self.WorkSelection.Harvest(self.Player)
+        if Result[0] == "Cooldown":
+            self.EmbedFrame.clear_fields()
+            self.EmbedFrame.insert_field_at(0, name="Warning", value=Result[1])
+        else:
+            self.EmbedFrame.clear_fields()
+            self.EmbedFrame.insert_field_at(0, name="Successful Harvest", value=Result[1])
+        await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)

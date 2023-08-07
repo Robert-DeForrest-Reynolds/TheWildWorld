@@ -1,12 +1,27 @@
-from time import time_ns
+from time import time
 
 class Job:
     def __init__(self):
-        self.last_harvest = 0
+        self.LastHarvest = 0
 
     async def Harvest(self, Player):
-        harvest_time = time_ns()
-        if harvest_time - self.last_harvest <= 5:
-            return f"Cooldown of {harvest_time - self.last_harvest} needed."
-        Player.Inventory["Apples"] += self.Output * ( - self.last_harvest)
-        self.last_harvest = harvest_time
+        HarvestTime = int(time())
+        print(HarvestTime)
+        print(self.LastHarvest)
+        if self.LastHarvest == 0:
+            HarvestAmount = round(self.Output * (HarvestTime - Player.Profile["Profile Created Date"]), 2)
+        else:
+            HarvestAmount = round(self.Output * (HarvestTime - self.LastHarvest), 2)
+        if HarvestTime - self.LastHarvest <= 5:
+            return ("Cooldown", f"Cooldown of {5-(HarvestTime - self.LastHarvest)} needed.")
+
+        if self.OutputItem not in Player.Inventory.keys():
+            Player.Inventory.update({self.OutputItem:HarvestAmount})
+        else:
+            Player.Inventory[self.OutputItem] += HarvestAmount
+        self.LastHarvest = HarvestTime
+        print(Player.Inventory)
+        print(Player.Inventory["Apple"])
+        print(HarvestTime)
+        print(self.LastHarvest)
+        return("Success", f"You harvested {HarvestAmount}")

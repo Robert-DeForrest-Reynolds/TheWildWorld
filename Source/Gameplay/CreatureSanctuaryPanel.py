@@ -13,9 +13,12 @@ class CreatureSanctuaryPanel:
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Sanctuary Panel", description=f"aka {self.Player.Profile['Username']}")
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Sanctuary Panel",
+                                description=f"aka {self.Player.Profile['Username']}")
     
-        self.PetsPanelReturnButton = Button(label="Return to Pets Panel", style=ButtonStyle.red)
+        self.PetsPanelReturnButton = Button(label="Return to Pets Panel",
+                                            style=ButtonStyle.red,
+                                            row=4)
 
         self.PetsPanelReturnButton.callback = self.PlayerPetsPanel.Reset
 

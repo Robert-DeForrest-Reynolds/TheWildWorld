@@ -93,7 +93,7 @@ async def Play_Command(Context):
 @commands.has_permissions(administrator=True)
 async def Admin_Create_Profile(Context):
     Member = GlobalData.FoundMembers[Context.author.name].Profile["Member Object"]
-    await CreateProfile(Member, GlobalData, GlobalData.Logger)
+    await CreateProfile(Member, GlobalData)
 
 
 @Levi.command("delete_profile")
