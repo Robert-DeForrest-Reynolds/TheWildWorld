@@ -44,21 +44,21 @@ class PlayPanel:
 
     async def Construct_New_Panel(self, PanelSelection, SelectInteraction):
         if PanelSelection == "Profile":
-            ProfilePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            ProfilePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Work":
-            WorkPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            WorkPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Pets":
-            PetsPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            PetsPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Market":
-            MarketPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            MarketPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Office":
-            OfficePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            OfficePanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Stocks":
-            StocksPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            StocksPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "The Hold":
-            HoldPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            HoldPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
         if PanelSelection == "Household":
-            HouseholdPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalDataRef)
+            HouseholdPanel(self.Context, self.Player, SelectInteraction, self, self.GlobalData)
 
     async def Reset(self, ButtonInteraction):
         if ButtonInteraction.user == self.Context.author:
@@ -68,6 +68,7 @@ class PlayPanel:
         try:
             self.Player.PanelOn = False
             await self.PlayPanelMessage.delete()
+            self.GlobalData.PlayerPanels.pop(self.Player.Profile["UUID"])
         except errors.NotFound:
             self.GlobalData.Logger.info("Panel already deleted, timeout useless.")
 

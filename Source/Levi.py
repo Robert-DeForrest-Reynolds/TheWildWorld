@@ -64,6 +64,12 @@ async def on_ready():
 
     GlobalData.LeviDatabase.Save_Global_Data(GlobalData)
 
+@Levi.event
+async def on_disconnect():
+    for PlayerID, Panel in GlobalData.PlayerPanels.items():
+        await Panel.Delete()
+        del GlobalData.PlayerPanels[PlayerID]
+
 
 @Levi.command(aliases=["WW", "ww", "wW", "Ww"])
 async def Play_Command(Context):
@@ -74,12 +80,13 @@ async def Play_Command(Context):
             GlobalData.Players[Context.author.id].PanelOn = True
         else:
             await GlobalData.PlayerPanels[Context.author.id].Delete()
-            # del GlobalData.PlayerPanels[Context.author.id]
+            del GlobalData.PlayerPanels[Context.author.id]
             GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData)})
             GlobalData.Players[Context.author.id].PanelOn = True
     else:
         GlobalData.Logger.info(f"{Context.author} called for a panel, but broke something. Fuckin' hell.")
         await Context.send("You do not have a profile yet. Stop breaking stuff. How did this even happen?")
+        await Context.message.delete()
 
 
 @Levi.command("create_profile")
