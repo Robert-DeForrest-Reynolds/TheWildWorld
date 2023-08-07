@@ -18,8 +18,9 @@ class GD: # Global Data
         Handler.setFormatter(formatter)
         self.Logger.addHandler(Handler)
         
-        self.Guilds = []
-        self.FoundMembers = {}
+        self.Guild = None
+        self.Members = {}
+        self.Channels = {}
         self.LeviDatabase = None
         self.Players = {}
         self.Key = None

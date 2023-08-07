@@ -22,16 +22,16 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [x] Player Profile Reset
 - [x] Player Profile Reset Logging
 - [x] Player Profile In-Memory Reloading
-- [ ] Player Profile Customization
-- [ ] Player Profile Customization Logging
-- [ ] Player Profile Statistics
-- [ ] Player Profile Panel
-- [ ] Player Panel Creation
-- [ ] Player Panel Creation Logging
-- [ ] Player Panel Security
-- [ ] Player Panel Security Logging
-- [ ] Player Panel Deletion Upon Creation of a New One
-- [ ] Player Panel Deletion Logging
+- [x] Player Profile Customization
+- [x] Player Profile Customization Logging
+- [x] Player Profile Statistics
+- [x] Player Profile Panel
+- [x] Player Panel Creation
+- [x] Player Panel Creation Logging
+- [x] Player Panel Security
+- [x] Player Panel Security Logging
+- [x] Player Panel Deletion Upon Creation of a New One
+- [x] Player Panel Deletion Logging
 - [ ] Player Job Permits
 - [ ] Player Job Permit Buying
 - [ ] Player Job Permit Buy Logging
@@ -43,10 +43,10 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Object Patent Panel Collection
 - [ ] Object Patent Panel Request Submitting
 - [ ] Object Patent Panel Logging
-- [ ] Work Panel
-- [ ] Work Panel Selection
-- [ ] Work Button
-- [ ] Work Button Logging
+- [x] Work Panel
+- [x] Work Panel Selection
+- [x] Work Button
+- [x] Work Button Logging
 - [ ] Player Profile Panel -> Inventory Panel
 - [ ] Player Market Panel
 - [ ] Player Market Selling, The Hold always buys things
@@ -56,6 +56,15 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Player Thirst, goes down when you work or do actions, goes up while resting
 - [ ] Player Drinking
 - [x] Clear Logs Command
+- [x] Day Count
+- [x] Day Count Channel Messaging
+- [x] Day Count Logging
+- [ ] Business Panel
+- [ ] Business Panel Start Business
+- [ ] Business Panel Sell Stock from Stock Market Requests
+- [ ] Stock Market Panel
+- [ ] Stock Market Buy Stock
+- [ ] Stock Market Sell Stock
 
 I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put, what is expected for 1.0 release is something functional that is still what you'd deem playable, with a gameplay loop. I'll start by adding a few things, and let you go from there. I recommend making a good list for you to tackle, and then adding more, and tackling them in groups. Anything put on this list will be expected in the 1.0 release. If there are things you do not think can be implemented timely, that aren't required for the core gameplay loop, just put them here: [[The Wild World Pets]], and focus on the 1.0 release. Word should be concise, but not necessarily vague, I just tend to be vague. You can word them however you'd like.
 
