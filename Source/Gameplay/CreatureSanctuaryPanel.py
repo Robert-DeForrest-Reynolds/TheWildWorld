@@ -1,5 +1,5 @@
-from discord import Embed, ButtonStyle
-from discord.ui import View, Button
+from discord import Embed, ButtonStyle, SelectOption
+from discord.ui import View, Button, Select
 from asyncio import create_task
 
 class CreatureSanctuaryPanel:

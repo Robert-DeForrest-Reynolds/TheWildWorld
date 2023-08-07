@@ -1,5 +1,5 @@
-from discord import Embed, ButtonStyle
-from discord.ui import View, Button
+from discord import Embed, ButtonStyle, SelectOption
+from discord.ui import View, Button, Select
 from asyncio import create_task
 
 class CreatureCollectingPanel:
@@ -16,12 +16,17 @@ class CreatureCollectingPanel:
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Collecting Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
-        self.PetsPanelReturnButton = Button(label="Return to Pets Panel",
-                                            style=ButtonStyle.red,
-                                            row=4)
+        self.SelectionOptions = [SelectOption(label="Manage Bait", description="Craft and buy baits."),
+                                 SelectOption(label="Manage Enclosure", description="Craft and buy enclosures."),
+                                 SelectOption(label="Manage Traps", description="Craft, place and monitor traps."),
+        ]
+        
+        self.Selection = Select(placeholder="Collecting Actions", options=self.SelectionOptions)
+        self.PetsPanelReturnButton = Button(label="Return to Pets Panel", style=ButtonStyle.red)
 
         self.PetsPanelReturnButton.callback = self.PlayerPetsPanel.Reset
 
+        self.BaseViewFrame.add_item(self.Selection)
         self.BaseViewFrame.add_item(self.PetsPanelReturnButton)
 
         await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
