@@ -63,14 +63,13 @@ class TWD:
                          "Hunger","Thirst","Sanity", "Morale",
                          "Age", "Jobs", "Profile Created Date"]
         Players = {}
-        Members = {Member.name: Member for Member in GlobalData.Guilds[0].members}
         Cursor = self.Generate_Cursor()
         PlayerDataList = Cursor.execute("SELECT * FROM Players").fetchall()
         for PlayerData in PlayerDataList:
             PlayerDataMapped = {}
             for Index, Data in enumerate(PlayerData):
                 PlayerDataMapped.update({PlayerDataMap[Index]:Data})
-            LoadedPlayer = Player(Members[PlayerData[1]])
+            LoadedPlayer = Player(GlobalData.Members[PlayerData[1]])
             for Name, Attribute in LoadedPlayer.Profile.items():
                 if Name not in ["Member Object", "Jobs"]:
                     LoadedPlayer.Profile[Name] = PlayerDataMapped[Name]

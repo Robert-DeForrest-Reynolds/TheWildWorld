@@ -5,6 +5,7 @@ from Player import Player
 from TWD import TWD
 from GD import GD
 from CreateProfile import CreateProfile
+from WorldSimulation import WorldSimulation
 
 from sys import argv
 
@@ -40,29 +41,20 @@ async def on_member_join(Member):
 
 @Levi.event
 async def on_ready():
-    if GlobalData.Debug == True:
-        for Guild in Levi.guilds:
-            GlobalData.Guilds.append(Guild)
-        for Member in GlobalData.Guilds[0].members:
-            GlobalData.FoundMembers.update({Member.name: Player(Member)})
-        GlobalData.LeviDatabase = TWD(GlobalData)
-    if GlobalData.Unstable == True:
-        for Guild in Levi.guilds:
-            GlobalData.Guilds.append(Guild)
-        for Member in GlobalData.Guilds[0].members:
-            GlobalData.FoundMembers.update({Member.name: Player(Member)})
-        GlobalData.LeviDatabase = TWD(GlobalData)
-    if GlobalData.Debug == False and GlobalData.Unstable == False:
-        for Guild in Levi.guilds:
-            GlobalData.Guilds.append(Guild)
-        for Member in GlobalData.Guilds[0].members:
-            GlobalData.FoundMembers.update({Member.name: Player(Member)})
-        GlobalData.LeviDatabase = TWD(GlobalData)
+    if len(Levi.guilds) == 1:
+        GlobalData.Guild = Levi.guilds[0]
+    else:
+        print("Why the fuck did I detect two guilds? Stop fucking around.")
+    GlobalData.Members = {Member.name: Member for Member in GlobalData.Guild.members}
+    GlobalData.Channels = {Channel.name:Channel for Channel in GlobalData.Guild.channels}
+
+    GlobalData.LeviDatabase = TWD(GlobalData)
 
     GlobalData.Players = GlobalData.LeviDatabase.Load_Players(GlobalData)
-    print(GlobalData.Players)
 
     GlobalData.LeviDatabase.Save_Global_Data(GlobalData)
+
+    WS = WorldSimulation(GlobalData)
 
 @Levi.event
 async def on_disconnect():
