@@ -53,10 +53,10 @@ class PetsPanel:
                                         self.GlobalData)
             elif self.SelectedPanel == "Creature Sanctuary":
                 CreatureSanctuaryPanel(self.Context,
-                                    self.Player,
-                                    SelectInteraction,
-                                    self,
-                                    self.GlobalData)
+                                       self.Player,
+                                       SelectInteraction,
+                                       self,
+                                       self.GlobalData)
         
         
     async def Reset(self, ButtonInteraction):
