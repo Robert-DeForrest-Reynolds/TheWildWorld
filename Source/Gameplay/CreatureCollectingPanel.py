@@ -3,6 +3,8 @@ from discord.ui import View, Button, Select
 from asyncio import create_task
 
 from Gameplay.ManageBaitsPanel import ManageBaitsPanel
+from Gameplay.ManageEnclosuresPanel import ManageEnclosuresPanel
+from Gameplay.ManageTrapsPanel import ManageTrapsPanel
 
 from WarningMessage import Warning_Message
 
@@ -29,7 +31,7 @@ class CreatureCollectingPanel:
                                  SelectOption(label="Manage Traps", description="Craft, place and monitor traps."),
         ]
         
-        self.Selection = Select(placeholder="Collecting Actions", options=self.SelectionOptions)
+        self.Selection = Select(placeholder="Creature Collecting Actions", options=self.SelectionOptions)
         self.PetsPanelReturnButton = Button(label="Return to Pets Panel", style=ButtonStyle.red)
 
         self.Selection.callback = self.Create_Panel
@@ -47,6 +49,18 @@ class CreatureCollectingPanel:
             
             if self.SelectedPanel == "Manage Baits":
                 ManageBaitsPanel(self.Context,
+                                        self.Player,
+                                        SelectInteraction,
+                                        self,
+                                        self.GlobalData)
+            elif self.SelectedPanel == "Manage Enclosures":
+                ManageEnclosuresPanel(self.Context,
+                                        self.Player,
+                                        SelectInteraction,
+                                        self,
+                                        self.GlobalData)
+            elif self.SelectedPanel == "Manage Traps":
+                ManageTrapsPanel(self.Context,
                                         self.Player,
                                         SelectInteraction,
                                         self,

@@ -19,22 +19,25 @@ class ManageBaitsPanel:
 
     async def Construct_Panel(self):
         self.BaseViewFrame = View(timeout=144000)
-        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Manage Bait Panel",
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Manage Baits Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
         self.EmbedFrame.add_field(name="Common Bait", value=self.Player.Baits["Common Bait"])
         self.EmbedFrame.add_field(name="Rare Bait", value=self.Player.Baits["Rare Bait"])
+        self.EmbedFrame.add_field(name="", value="", inline=False)
+        
         self.EmbedFrame.add_field(name="Elite Bait", value=self.Player.Baits["Elite Bait"])
         self.EmbedFrame.add_field(name="Legendary Bait", value=self.Player.Baits["Legendary Bait"])
+        self.EmbedFrame.add_field(name="", value="", inline=False)
+        
         self.EmbedFrame.add_field(name="Fabled Bait", value=self.Player.Baits["Fabled Bait"])
         self.EmbedFrame.add_field(name="Divine Bait", value=self.Player.Baits["Divine Bait"])
 
-        self.SelectionOptions = [SelectOption(label="Select Bait", description="Craft and buy baits."),
-                                 SelectOption(label="Buy Bait", description="Craft and buy enclosures."),
-                                 SelectOption(label="Craft Bait", description="Craft, place and monitor traps."),
+        self.SelectionOptions = [SelectOption(label="Buy Bait", description="Buy baits from the player market."),
+                                 SelectOption(label="Craft Bait", description="Craft baits with your own materials."),
         ]
         
-        self.Selection = Select(placeholder="Collecting Actions", options=self.SelectionOptions)
+        self.Selection = Select(placeholder="Bait Actions", options=self.SelectionOptions)
         self.CreatureCollectingPanelReturnButton = Button(label="Return to Creature Collecting Panel", style=ButtonStyle.red)
 
         self.CreatureCollectingPanelReturnButton.callback = self.CreatureCollectingPanel.Reset

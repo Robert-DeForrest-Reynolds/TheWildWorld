@@ -29,13 +29,22 @@ class PlayerObject:
             "Divine Bait": 0,
         }
 
-        self.Enlosures = {
-            "Common Enclosure": 0,
-            "Rare Enclosure": 0,
-            "Elite Enclosure": 0,
-            "Legendary Enclosure": 0,
-            "Fabled Enclosure": 0,
-            "Divine Enclosure": 0,
+        self.Enclosures = {
+            "Tiny Nets": 0,
+            "Small Nets": 0,
+            "Medium Nets": 0,
+            "Large Nets": 0,
+            "Enormous Nets": 0,
+            "Tiny Aquatic Nets": 0,
+            "Small Aquatic Nets": 0,
+            "Medium Aquatic Nets": 0,
+            "Large Aquatic Nets": 0,
+            "Enormous Aquatic Nets": 0,
+            "Tiny Cages": 0,
+            "Small Cages": 0,
+            "Medium Cages": 0,
+            "Large Cages": 0,
+            "Enormous Cages": 0,
         }
         
         self.Traps = {

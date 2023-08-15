@@ -75,16 +75,16 @@ I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put
 
 ### Pets
 - [ ] Pets, Conceptualize Programmatic Architecture
-- [ ] Pets Panel Action Selection
-- [ ] Pets Panel My Pets Menu
-- [ ] Pets Panel My Pets, Pet Profiles
-- [ ] Pets Panel Bait Menu
-- [ ] Pets Panel Bait Menu, Bait Selection
-- [ ] Pets Panel Bait Menu, Use Bait
-- [ ] Pets Panel Bait Menu, Use Bait Logging
-- [ ] Pets Panel Bait Menu, Catching
-- [ ] Pets Panel Bait Menu, Catching Logging
-- [ ] Pets Panel Bait Menu, Catching, Name Creature
+- [x] Pets Panel Action Selection
+- [x] Pets Panel Creature Collecting Menu
+- [ ] Pets Panel Creature Sanctuary Menu
+- [x] Pets Panel Creature Collecting, Manage Baits Menu
+- [ ] Pets Panel Creature Collecting, Manage Baits Menu, Buy Bait
+- [ ] Pets Panel Creature Collecting, Manage Baits Menu, Craft Bait
+- [x] Pets Panel Creature Collecting, Manage Enclosures Menu
+- [ ] Pets Panel Creature Collecting, Manage Enclosures Menu, Buy Enclosure
+- [ ] Pets Panel Creature Collecting, Manage Enclosures Menu, Craft Enclosure
+- [ ] Pets Panel Creature Collecting, Manage Traps Menu
 
 (Instead of a bait menu, create a catching menu with bait and taming options. First you have to bait a creature by placing down an enclosure with a specific tier of bait, then you have to perform an action to tame the trapped creature. After you have tamed the creature you can then name it and begin building a relationship with it. Once you reach a certain level of relationship with the creature, you can start to train it for battles.)
 
