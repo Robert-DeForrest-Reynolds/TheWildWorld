@@ -1,12 +1,12 @@
 from discord.ui import View, Button, Modal, TextInput
 from discord import ButtonStyle
-from Player import Player
+from PlayerObject import PlayerObject
 from Jobs.HarvestApples import HarvestApples
-from Jobs.ChopTrees import ChopTrees
+from Jobs.ChopOakTrees import ChopOakTrees
 from Jobs.MineCoal import MineCoal
 
 JobsSelector = {"Harvest Apples": HarvestApples,
-                "Chop Trees": ChopTrees,
+                "Chop Trees": ChopOakTrees,
                 "Mine Coal": MineCoal}
 
 LeviIntroduction = ("Hello, my name is Levi Kiln. I'm here to introduce to you to the Wild World. "+
@@ -21,15 +21,15 @@ LeviPassword = ("One more thing! I'll need you to make a password now for your a
 async def CreateProfile(Member, GlobalData):
     async def Set_Password(ModalInteraction, SelectedWork):
         Password = ModalInteraction.data['components'][0]['components'][0]['value']
-        NewPlayer.Profile["Password"] = Password
+        NewPlayer.Password = Password
         ResponseDictionary = {"Harvest Apples": "I can't wait to taste some of those apples!",
                               "Chop Trees": "You should sell some of that lumber to Harold!",
                               "Mine Coal": "Mining coal? Man, I hope your back is strong!"}
         GlobalData.Logger.info(f"Created a profile.\nName:{NewPlayer.Profile['Username']}, SelectedWork:{SelectedWork}, Password:{Password}")
-        Cursor = GlobalData.LeviDatabase.Generate_Cursor()
-        Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password, Jobs, 'Profile Created Date') VALUES(?, ?, ?, ?, ?, ?)",
-                                               (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Profile["Password"], SelectedWork, NewPlayer.Profile["Profile Created Date"]), )
-        GlobalData.LeviDatabase.TWDCONNECTION.commit()
+        Cursor = GlobalData.Database.Generate_Cursor()
+        Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password, ProfileCreationDate) VALUES(?, ?, ?, ?, ?)",
+                                               (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Password, NewPlayer.Profile["Profile Created Date"]))
+        GlobalData.Database.TWDCONNECTION.commit()
         Cursor.close()
         await ModalInteraction.response.send_message(f"Alright then! You've set your password to '{Password}'. {ResponseDictionary[SelectedWork]} I wish you the best of luck on your adventures! We'll talk more soon I'm sure.")
     async def Select_Work(ButtonInteraction):
@@ -51,7 +51,7 @@ async def CreateProfile(Member, GlobalData):
     AppleButton.callback = Select_Work
     ChoppingButton.callback = Select_Work
     MiningButton.callback = Select_Work
-    NewPlayer = Player(Member)
-    GlobalData.FoundMembers[NewPlayer.Profile["UUID"]] = NewPlayer
+    NewPlayer = PlayerObject(Member)
+    GlobalData.Members[NewPlayer.Profile["UUID"]] = NewPlayer
     GlobalData.Players.update({NewPlayer.Profile["UUID"]:NewPlayer})
     await Member.send(LeviIntroduction, view=ViewFrame)

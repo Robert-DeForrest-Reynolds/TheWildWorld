@@ -1,7 +1,6 @@
-from discord import Intents
+from discord import Intents, RateLimited
 from discord.ext import commands
 from Gameplay.PlayPanel import PlayPanel
-from Player import Player
 from TWD import TWD
 from GD import GD
 from CreateProfile import CreateProfile
@@ -16,7 +15,7 @@ GlobalData.KeyType = argv[2]
 
 intents = Intents.all()
 intents.members = True
-Levi = commands.Bot(command_prefix=['T', 't'], intents=intents)
+Levi = commands.Bot(command_prefix=['.'], intents=intents)
 
 if GlobalData.KeyType in ["lani", "robert"]:
     if GlobalData.KeyType == "lani":
@@ -29,10 +28,9 @@ elif GlobalData.KeyType == "unstable":
     GlobalData.Debug = True
     GlobalData.Unstable = True
 elif GlobalData.KeyType == "official":
-    Levi.command_prefix = ["T", "t"]
+    Levi.command_prefix = ["."]
 
 print(f"Command Prefix: {Levi.command_prefix}")
-
 
 @Levi.event
 async def on_member_join(Member):
@@ -48,22 +46,16 @@ async def on_ready():
     GlobalData.Members = {Member.name: Member for Member in GlobalData.Guild.members}
     GlobalData.Channels = {Channel.name:Channel for Channel in GlobalData.Guild.channels}
 
-    GlobalData.LeviDatabase = TWD(GlobalData)
+    GlobalData.Database = TWD(GlobalData)
 
-    GlobalData.Players = GlobalData.LeviDatabase.Load_Players(GlobalData)
+    GlobalData.Players = GlobalData.Database.Load_Players(GlobalData)
 
-    GlobalData.LeviDatabase.Save_Global_Data(GlobalData)
+    GlobalData.Database.Save_Global_Data(GlobalData)
 
     WS = WorldSimulation(GlobalData)
 
-@Levi.event
-async def on_disconnect():
-    for PlayerID, Panel in GlobalData.PlayerPanels.items():
-        await Panel.Delete()
-        del GlobalData.PlayerPanels[PlayerID]
 
-
-@Levi.command(aliases=["WW", "ww", "wW", "Ww"])
+@Levi.command(aliases=["TWW", "tWW", "Tww", "tww", "TwW", "twW", "TWw", "tWw"])
 async def Play_Command(Context):
     if Context.author.id in list(GlobalData.Players.keys()):
         if GlobalData.Players[Context.author.id].PanelOn == False:
@@ -81,22 +73,43 @@ async def Play_Command(Context):
         await Context.message.delete()
 
 
+@Levi.command(aliases=["Cleanup", "cleanup"])
+@commands.has_permissions(administrator=True)
+async def Stop_Bot_Properly(Context):
+    GlobalData.Logger.info("Started cleaning up")
+    async for Message in GlobalData.Channels['town-hall'].history(limit=None):
+        if Message.author.bot == True:
+            try:
+                await Message.delete()
+            except RateLimited:
+                continue
+        if Message.content.startswith(Levi.command_prefix):
+            try:
+                await Message.delete()
+            except RateLimited:
+                continue
+    for PlayerID, Panel in GlobalData.PlayerPanels.items():
+        await Panel.Delete()
+        del GlobalData.PlayerPanels[PlayerID]
+    GlobalData.Logger.info("Finished cleaning up")
+
+
 @Levi.command("create_profile")
 @commands.has_permissions(administrator=True)
 async def Admin_Create_Profile(Context):
-    Member = GlobalData.FoundMembers[Context.author.name].Profile["Member Object"]
+    Member = GlobalData.Members[Context.author.name]
     await CreateProfile(Member, GlobalData)
 
 
 @Levi.command("delete_profile")
 @commands.has_permissions(administrator=True)
 async def Delete_Profile(Context, GivenUsername):
-    Cursor = GlobalData.LeviDatabase.Generate_Cursor()
+    Cursor = GlobalData.Database.Generate_Cursor()
     Cursor.execute(f"DELETE FROM Players WHERE Username='{GivenUsername}'")
-    GlobalData.LeviDatabase.TWDCONNECTION.commit()
+    GlobalData.Database.TWDCONNECTION.commit()
     Cursor.close()
     GlobalData.Logger.info(f"Attempted to delete {GivenUsername}'s profile")
-    if GivenUsername in GlobalData.LeviDatabase.Cursor.execute(f"SELECT Username FROM Players WHERE Username='{GivenUsername}'").fetchall()[0]:
+    if GivenUsername in GlobalData.Database.Cursor.execute(f"SELECT Username FROM Players WHERE Username='{GivenUsername}'").fetchall()[0]:
         GlobalData.Logger.info(f"Successfully deleted {GivenUsername}'s profile")
     else:
         GlobalData.Logger.info(f"Successfully deleted {GivenUsername}'s profile")

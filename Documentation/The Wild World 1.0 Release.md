@@ -32,9 +32,12 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [x] Player Panel Security Logging
 - [x] Player Panel Deletion Upon Creation of a New One
 - [x] Player Panel Deletion Logging
+- [x] Day Save to Data
+- [x] Day Save Load
+- [x] Player Jobs Board Panel
+- [x] Clean up function for deleting Levi's messages, and any active panels
 - [ ] Player Job Permits
-- [ ] Player Job Permit Buying
-- [ ] Player Job Permit Buy Logging
+- [ ] Player Job Permit Obtaining Logging
 - [ ] Player Job Permit Data Saving
 - [ ] Player Job Permit Data Loading
 - [ ] Player Inventory Data Saving
@@ -43,6 +46,8 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Object Patent Panel Collection
 - [ ] Object Patent Panel Request Submitting
 - [ ] Object Patent Panel Logging
+- [ ] Reconnect on Disconnect for Cleanup
+- [ ] Find Way to Clear Panels On Bot Getting Turned Off
 - [x] Work Panel
 - [x] Work Panel Selection
 - [x] Work Button

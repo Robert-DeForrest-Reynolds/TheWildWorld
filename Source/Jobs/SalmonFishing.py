@@ -1,11 +1,11 @@
 from Jobs.Job import Job
 
-class HarvestApples(Job):
+class SalmonFishing(Job):
     def __init__(self):
         super().__init__()
-        self.Name = "Harvest Apples"
-        self.OutputItem = "Apple"
-        self.Description = "Harvest apples, and sell or cook them."
+        self.Name = "Salmon Fishing"
+        self.OutputItem = "Salmon"
+        self.Description = "Fish for salmon in the Caswell River."
         self.Level = 1
         self.Output = 0.16 * self.Level
         self.LastHarvest = 0

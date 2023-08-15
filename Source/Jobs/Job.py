@@ -5,6 +5,9 @@ class Job:
         self.LastHarvest = 0
         self.OutputItem = None
 
+        # Termination Date is set 3 real life days from time job is created and given to player 259200
+        self.TerminationDate = time() + 20
+
     async def Harvest(self, Player):
         HarvestTime = int(time())
         print(HarvestTime)

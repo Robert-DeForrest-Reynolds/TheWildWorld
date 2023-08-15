@@ -1,29 +1,30 @@
 from asyncio import create_task
 from time import time
 
-class Player:
+class PlayerObject:
     def __init__(self, Member):
+        self.MemberObject = Member
+        self.Password = None,
+        self.ProfileCreationDate = int(time())
         self.Profile = {
-            "Member Object": Member,
             "Username": Member.name,
             "Nickname": None,
             "UUID": Member.id,
-            "Password": None,
             "Health": 20,
             "Hunger": 0,
             "Thirst": 0,
             "Sanity": 100,
             "Morale": 500,
             "Age": 1,
-            "Jobs": {},
-            "Profile Created Date": int(time()),
         }
+
+        self.Jobs = {}
 
         self.Inventory = {}
         
         self.PanelOn = False
 
-        if self.Profile["Member Object"].global_name != None:
-            self.Profile["Nickname"] = self.Profile["Member Object"].global_name
+        if self.MemberObject.global_name != None:
+            self.Profile["Nickname"] = self.MemberObject.global_name
         else:
-            self.Profile["Nickname"] = self.Profile["Member Object"].name
+            self.Profile["Nickname"] = self.MemberObject.name
