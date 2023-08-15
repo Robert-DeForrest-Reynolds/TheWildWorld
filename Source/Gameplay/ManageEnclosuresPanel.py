@@ -26,31 +26,11 @@ class ManageEnclosuresPanel:
         # Medium = Tiger to Bear
         # Large = Hippo to Elephant
         # Enoumous = Whale
-        self.EmbedFrame.add_field(name="Tiny Nets", value=self.Player.Enclosures["Tiny Nets"])
-        self.EmbedFrame.add_field(name="Small Nets", value=self.Player.Enclosures["Small Nets"])
+        self.EmbedFrame.add_field(name="Nets", value=self.Player.Enclosures["Nets"])
+        self.EmbedFrame.add_field(name="Aquatic Nets", value=self.Player.Enclosures["Aquatic Nets"])
         self.EmbedFrame.add_field(name="", value="", inline=False)
         
-        self.EmbedFrame.add_field(name="Medium Nets", value=self.Player.Enclosures["Medium Nets"])
-        self.EmbedFrame.add_field(name="Large Nets", value=self.Player.Enclosures["Large Nets"])
-        self.EmbedFrame.add_field(name="", value="", inline=False)
-        
-        self.EmbedFrame.add_field(name="Enormous Nets", value=self.Player.Enclosures["Enormous Nets"])
-        self.EmbedFrame.add_field(name="Tiny Aquatic Nets", value=self.Player.Enclosures["Tiny Aquatic Nets"])
-        self.EmbedFrame.add_field(name="", value="", inline=False)
-        
-        self.EmbedFrame.add_field(name="Small Aquatic Nets", value=self.Player.Enclosures["Small Aquatic Nets"])
-        self.EmbedFrame.add_field(name="Medium Aquatic Nets", value=self.Player.Enclosures["Medium Aquatic Nets"])
-        self.EmbedFrame.add_field(name="", value="", inline=False)
-        
-        self.EmbedFrame.add_field(name="Large Aquatic Nets", value=self.Player.Enclosures["Large Aquatic Nets"])
-        self.EmbedFrame.add_field(name="Enormous Aquatic Nets", value=self.Player.Enclosures["Enormous Aquatic Nets"])
-        self.EmbedFrame.add_field(name="", value="", inline=False)
-        
-        self.EmbedFrame.add_field(name="Tiny Cages", value=self.Player.Enclosures["Tiny Cages"])
         self.EmbedFrame.add_field(name="Small Cages", value=self.Player.Enclosures["Small Cages"])
-        self.EmbedFrame.add_field(name="", value="", inline=False)
-        
-        self.EmbedFrame.add_field(name="Medium Cages", value=self.Player.Enclosures["Medium Cages"])
         self.EmbedFrame.add_field(name="Large Cages", value=self.Player.Enclosures["Large Cages"])
         self.EmbedFrame.add_field(name="", value="", inline=False)
         
