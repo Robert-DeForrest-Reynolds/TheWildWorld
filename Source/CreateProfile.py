@@ -28,13 +28,13 @@ async def CreateProfile(Member, GlobalData):
         GlobalData.Logger.info(f"Created a profile.\nName:{NewPlayer.Profile['Username']}, SelectedWork:{SelectedWork}, Password:{Password}")
         Cursor = GlobalData.Database.Generate_Cursor()
         Cursor.execute(f"INSERT OR IGNORE INTO Players(UUID, Username, Nickname, Password, ProfileCreationDate) VALUES(?, ?, ?, ?, ?)",
-                                               (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Password, NewPlayer.Profile["Profile Created Date"]))
+                                               (NewPlayer.Profile["UUID"], NewPlayer.Profile["Username"], NewPlayer.Profile["Nickname"], NewPlayer.Password, NewPlayer.ProfileCreationDate))
         GlobalData.Database.TWDCONNECTION.commit()
         Cursor.close()
         await ModalInteraction.response.send_message(f"Alright then! You've set your password to '{Password}'. {ResponseDictionary[SelectedWork]} I wish you the best of luck on your adventures! We'll talk more soon I'm sure.")
     async def Select_Work(ButtonInteraction):
         SelectedWork = ButtonInteraction.data["custom_id"]
-        NewPlayer.Profile["Jobs"].update({SelectedWork: JobsSelector[SelectedWork]()})
+        NewPlayer.Jobs.update({SelectedWork: JobsSelector[SelectedWork]()})
         PasswordModal = Modal(title="Set Password")
         PasswordInput = TextInput(label="Please enter a password")
         PasswordModal.on_submit = lambda ModalInteraction: Set_Password(ModalInteraction, SelectedWork)
