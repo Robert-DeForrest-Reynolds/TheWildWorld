@@ -61,9 +61,9 @@ class ProfilePanel:
             self.EmbedFrame.add_field(name="You changed your nickname.", value=f"Your nickname was changed from {self.Player.Profile['Nickname']} to {Nickname}")
             self.Player.Profile["Nickname"] = Nickname
             self.EmbedFrame.title = f"{self.Player.Profile['Nickname']}'s Profile Panel"
-            Cursor = self.GlobalData.LeviDatabase.Generate_Cursor()
+            Cursor = self.GlobalData.Database.Generate_Cursor()
             Cursor.execute(f"UPDATE Players SET Nickname = ? WHERE UUID=?", (Nickname, self.Player.Profile['UUID']))
-            self.GlobalData.LeviDatabase.TWDCONNECTION.commit()
+            self.GlobalData.Database.TWDCONNECTION.commit()
             Cursor.close()
             await ModalInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
         else:

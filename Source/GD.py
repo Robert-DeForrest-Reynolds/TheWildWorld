@@ -21,7 +21,7 @@ class GD: # Global Data
         self.Guild = None
         self.Members = {}
         self.Channels = {}
-        self.LeviDatabase = None
+        self.Database = None
         self.Players = {}
         self.Key = None
         self.KeyType = None

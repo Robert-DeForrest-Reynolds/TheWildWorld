@@ -39,12 +39,12 @@ class PlayPanel:
         ]
         
         self.Selection = Select(placeholder="Panel Selection",options=self.SelectionOptions)
-        self.Selection.callback = lambda SelectInteraction: create_task(self.Construct_New_Panel(SelectInteraction.data["values"][0], SelectInteraction))
+        self.Selection.callback = lambda SelectInteraction: create_task(self.Create_Panel(SelectInteraction.data["values"][0], SelectInteraction))
         self.BaseViewFrame.add_item(self.Selection)
         
         self.PlayPanelMessage = await self.Context.send(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
-    async def Construct_New_Panel(self, PanelSelection, SelectInteraction):
+    async def Create_Panel(self, PanelSelection, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
             if PanelSelection == "Profile":
                 ProfilePanel(self.Context,
@@ -115,7 +115,7 @@ class PlayPanel:
             ]
             
             self.Selection = Select(placeholder="Panel Selection",options=self.SelectionOptions)
-            self.Selection.callback = lambda SelectInteraction: create_task(self.Construct_New_Panel(SelectInteraction.data["values"][0], SelectInteraction))
+            self.Selection.callback = lambda SelectInteraction: create_task(self.Create_Panel(SelectInteraction.data["values"][0], SelectInteraction))
             self.BaseViewFrame.add_item(self.Selection)
             
             self.PlayPanelMessage = await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)

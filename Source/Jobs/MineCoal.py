@@ -8,4 +8,4 @@ class MineCoal(Job):
         self.Description = "Mine coal and sell it, or use it as fuel to power your equipment."
         self.Level = 1
         self.Output = 0.16 * self.Level
-        self.last_harvest = 0
+        self.LastHarvest = 0

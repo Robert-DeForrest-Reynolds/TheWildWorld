@@ -2,7 +2,8 @@
 [[DeForrest Studios]]
 [[The Wild World Panels]]
 [[The Wild World Developer Operations]]
-
+[[The Wild World Locations]]
+[[The Wild World Database]]
 # Systems
 [[The Wild World Pets]]
 [[The Wild World NPC's]]
@@ -16,6 +17,7 @@
 [[The Wild World Government]]
 [[The Wild World Working]]
 [[The Wild World Object Patents]]
+[[The Wild World Jobs]]
 
 [Levi Explanation](#Levi)
 
