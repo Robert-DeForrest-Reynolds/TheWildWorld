@@ -5,7 +5,9 @@
 [[The Wild World Locations]]
 [[The Wild World Database]]
 # Systems
-[[The Wild World Pets]]
+[[The Wild World Arcane Nexus]]
+[[The Wild World Taming]]
+[[The Wild World Creatures]]
 [[The Wild World NPC's]]
 [[The Wild World Scripting]]
 [[The Wild World Businesses]]
@@ -14,7 +16,7 @@
 [[The Wild World Thirst]]
 [[The Wild World Fatigue]]
 [[The Wild World Stock Market]]
-[[The Wild World Government]]
+[[The Wild World VERIDIAN]]
 [[The Wild World Working]]
 [[The Wild World Object Patents]]
 [[The Wild World Jobs]]
@@ -58,33 +60,3 @@ The player testing Discord server is "The Wild World Unstable", which has the cu
 The developer testing Discord server "The Wild World Testing", which has the development version of Levi running.
 There are 3 GitHub repositories, one for each Discord server.
 The "Levi-Test-Robert-Reynolds" bot is the source for the primary testing repository, and other versions of the bot for developer will be forks of that repository.
-
-
-### Setup
-There are 5 primary categories of channels for players to communicate and interact within the world, which are the 5 capital cities of Capora, the planet players are on, otherwise known as "The Wild World":
-- Harna
-	- Hall of Health. the Great Capital of Capora
-		- Public announcements are posted here.
-		- There is a voice version of the Hall of Health for large meetings
-	- Balton, the Stronghold of Capora's ruling government "The Hold"
-		- Apply for loans.
-		- Buy permits.
-		- Get jobs.
-- Lethro
-	- Everpeak, the Leading Brokerage Service of Capora
-		- Buy and sell stocks of public companies.
-		- Create or invest in EFTs.
-		- Invest in other player's portfolios.
-- Jeem
-	- Yangaro, the Creature Sanctuary
-		- Buy and sell creatures.
-		- Heal creatures.
-		- Train creatures.
-- Kentargo
-	- Argo Square, the Largest Market in Capora
-		- Trade with other players.
-		- Post trades for other players to reply to.
-- Moraeva
-	- Being the residential city of Capora, this is where most players home are.
-
-A majority of gameplay will take place in other channels, but announcements, and dual-interactions (trades, combat, etc.) will be held within these channels.

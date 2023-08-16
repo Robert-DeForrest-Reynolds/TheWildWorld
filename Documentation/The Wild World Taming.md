@@ -1,3 +1,6 @@
+
+Need 65 creatures before launch. All obtainable, with unique diets.
+
 ### Programmatic Architecture
 Each creature is implemented as a class:
 ```Python
@@ -94,17 +97,11 @@ Auroradons: Creatures akin to celestial dragons, they soar through the heavens, 
 
 Omnitrons: Living constructs embodying the essence of multiple dimensions, they wield powers from parallel realities. 
 
-Celestichors: Celestial steeds with constellations etched into their hides, they bear chosen riders through the cosmos. 
-
 Voidforged: Entities born in the void, they possess abilities that draw on the abyssal powers of dark matter and anti-energy. 
 
 Xenosplice: Creatures with bodies composed of multiple fragments, each part linked to a different cosmic plane. 
 
-Etherechthys: Guardians of cosmic equilibrium, these beings maintain order and harmony throughout the universe. 
-
 Eldrastrals: Eldritch beings that exist beyond mortal comprehension, influencing events on a cosmic scale. 
-
-Elysium Envoys: Emissaries from the realm of Elysium, they bring knowledge of divine laws and cosmic wisdom.
 
 Aeolusions: Creatures with the ability to control winds and air currents, guiding cosmic forces with their flight. 
 

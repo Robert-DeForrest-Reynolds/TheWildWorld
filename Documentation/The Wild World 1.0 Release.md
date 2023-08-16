@@ -71,7 +71,7 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Stock Market Buy Stock
 - [ ] Stock Market Sell Stock
 
-I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put, what is expected for 1.0 release is something functional that is still what you'd deem playable, with a gameplay loop. I'll start by adding a few things, and let you go from there. I recommend making a good list for you to tackle, and then adding more, and tackling them in groups. Anything put on this list will be expected in the 1.0 release. If there are things you do not think can be implemented timely, that aren't required for the core gameplay loop, just put them here: [[The Wild World Pets]], and focus on the 1.0 release. Word should be concise, but not necessarily vague, I just tend to be vague. You can word them however you'd like.
+I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put, what is expected for 1.0 release is something functional that is still what you'd deem playable, with a gameplay loop. I'll start by adding a few things, and let you go from there. I recommend making a good list for you to tackle, and then adding more, and tackling them in groups. Anything put on this list will be expected in the 1.0 release. If there are things you do not think can be implemented timely, that aren't required for the core gameplay loop, just put them here: [[The Wild World Taming]], and focus on the 1.0 release. Word should be concise, but not necessarily vague, I just tend to be vague. You can word them however you'd like.
 
 ### Pets
 - [ ] Pets, Conceptualize Programmatic Architecture

@@ -3,12 +3,14 @@ from discord.ui import View, Button, Select
 from asyncio import create_task
 from WarningMessage import Warning_Message
 
+from Gameplay.Panel import Panel
 from Gameplay.CreatureCollectingPanel import CreatureCollectingPanel
 from Gameplay.CreatureSanctuaryPanel import CreatureSanctuaryPanel
 
-class PetsPanel:
+class PetsPanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
+            super().__init__()
             self.Context = Context
             self.Player = Player
             self.GivenInteraction = GivenInteraction

@@ -22,7 +22,7 @@ class WorkPanel:
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Work Panel", 
                                 description=f"aka {self.Player.Profile['Username']}")
 
-        if len(self.Player.Profile["Jobs"]) >= 1:
+        if len(self.Player.Jobs) >= 1:
             for JobName, JobObject in self.Player.Profile["Jobs"].items():
                 self.WorkSelectionOptions = []
                 self.WorkSelection = Select(placeholder="What work would you like to do?", 

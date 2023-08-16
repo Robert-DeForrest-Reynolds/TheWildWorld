@@ -5,6 +5,7 @@ from asyncio import create_task
 
 from WarningMessage import Warning_Message
 
+from Gameplay.Panel import Panel
 from Gameplay.WorkPanel import WorkPanel
 from Gameplay.ProfilePanel import ProfilePanel
 from Gameplay.PetsPanel import PetsPanel
@@ -14,8 +15,9 @@ from Gameplay.OfficePanel import OfficePanel
 from Gameplay.StocksPanel import StocksPanel
 from Gameplay.HouseholdPanel import HouseholdPanel
 
-class PlayPanel:
+class PlayPanel(Panel):
     def __init__(self, Context, GlobalData):
+        super().__init__()
         self.Context = Context
         self.Player = GlobalData.Players[Context.author.id]
         self.GlobalData = GlobalData
@@ -23,7 +25,7 @@ class PlayPanel:
 
     async def Construct_Panel(self):
         await self.Context.message.delete()
-        self.BaseViewFrame = View(timeout=1800)
+        self.BaseViewFrame = View(timeout=8)
         self.BaseViewFrame.on_timeout = self.TimeoutDelete
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Main Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
@@ -42,7 +44,7 @@ class PlayPanel:
         self.Selection.callback = lambda SelectInteraction: create_task(self.Create_Panel(SelectInteraction.data["values"][0], SelectInteraction))
         self.BaseViewFrame.add_item(self.Selection)
         
-        self.PlayPanelMessage = await self.Context.send(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        self.PanelMessage = await self.Context.send(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Create_Panel(self, PanelSelection, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
@@ -121,15 +123,3 @@ class PlayPanel:
             self.PlayPanelMessage = await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  ButtonInteraction.user))
-
-    async def TimeoutDelete(self):
-        try:
-            self.Player.PanelOn = False
-            await self.PlayPanelMessage.delete()
-            self.GlobalData.PlayerPanels.pop(self.Player.Profile["UUID"])
-        except errors.NotFound:
-            self.GlobalData.Logger.info("Panel already deleted, timeout useless.")
-
-    async def Delete(self):
-        self.Player.PanelOn = False
-        await self.PlayPanelMessage.delete()

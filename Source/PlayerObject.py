@@ -5,7 +5,12 @@ class PlayerObject:
     def __init__(self, Member):
         self.MemberObject = Member
         self.Password = None,
+        self.SpecialEnclosure = {}
+        self.Inventory = {}
+        self.Jobs = {}
+        self.PanelOn = False
         self.ProfileCreationDate = int(time())
+
         self.Profile = {
             "Username": Member.name,
             "Nickname": None,
@@ -18,8 +23,6 @@ class PlayerObject:
             "Age": 1,
         }
 
-        self.Jobs = {}
-
         self.Baits = {
             "Common Bait": 0,
             "Rare Bait": 0,
@@ -31,19 +34,16 @@ class PlayerObject:
 
         self.Enclosures = {
             "Nets": 0,
+<<<<<<< Updated upstream
             "Aquatic Nets": 0,
+=======
+>>>>>>> Stashed changes
             "Small Cages": 0,
             "Large Cages": 0,
             "Enormous Cages": 0,
         }
         
         self.Traps = {}
-
-        self.SpecialEnclosure = {}
-
-        self.Inventory = {}
-        
-        self.PanelOn = False
 
         if self.MemberObject.global_name != None:
             self.Profile["Nickname"] = self.MemberObject.global_name
