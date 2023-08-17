@@ -1,23 +1,23 @@
 from discord import Embed, ButtonStyle, SelectOption
 from discord.ui import View, Button, Select
+
 from asyncio import create_task
-from WarningMessage import Warning_Message
+
+from Gameplay.Panel import Panel
 from Gameplay.JobsBoardPanel import JobsBoardPanel
 
-class HoldPanel:
+from WarningMessage import Warning_Message
+
+class HoldPanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
-            self.Context = Context
-            self.Player = Player
-            self.GivenInteraction = GivenInteraction
-            self.GlobalData = GlobalData
+            super().__init__(Context, Player, GlobalData)
             self.PlayerPlayPanel = PlayerPlayPanel
-            create_task(self.Construct_Panel())
+            create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
-    async def Construct_Panel(self):
-        self.BaseViewFrame = View(timeout=144000)
+    async def Construct_Panel(self, GivenInteraction):
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Hold Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
@@ -38,7 +38,7 @@ class HoldPanel:
         self.BaseViewFrame.add_item(self.Selection)
         self.BaseViewFrame.add_item(self.PlayPanelReturnButton)
 
-        await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Create_Panel(self, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
@@ -51,7 +51,3 @@ class HoldPanel:
                                self,
                                self.GlobalData)
         
-    async def Reset(self, ButtonInteraction):
-        if ButtonInteraction.user.id == self.Context.author.id:
-            self.GivenInteraction = ButtonInteraction
-            await self.Construct_Panel()

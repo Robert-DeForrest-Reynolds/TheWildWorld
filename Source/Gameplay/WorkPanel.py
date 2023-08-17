@@ -1,24 +1,23 @@
 from discord import SelectOption, Embed, ButtonStyle
 from discord.ui import Select, Button, View
 
-from WarningMessage import Warning_Message
-
 from asyncio import create_task
 
-class WorkPanel:
+from Gameplay.Panel import Panel
+
+from WarningMessage import Warning_Message
+
+
+class WorkPanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
-            self.Context = Context
-            self.Player = Player
-            self.GivenInteraction = GivenInteraction
-            self.GlobalData = GlobalData
+            super().__init__(Context, Player, GlobalData)
             self.PlayerPlayPanel = PlayerPlayPanel
-            create_task(self.Construct_Panel())
+            create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
-    async def Construct_Panel(self):
-        self.BaseViewFrame = View(timeout=144000)
+    async def Construct_Panel(self, GivenInteraction):
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Work Panel", 
                                 description=f"aka {self.Player.Profile['Username']}")
 
@@ -43,7 +42,7 @@ class WorkPanel:
 
         self.BaseViewFrame.add_item(self.PlayPanelReturnButton)
             
-        await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Load_Selection(self, WorkSelectionInteraction):
         if WorkSelectionInteraction.user.id == self.Context.author.id:

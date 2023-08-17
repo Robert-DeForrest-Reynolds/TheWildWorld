@@ -5,4 +5,4 @@ TWD.db
 Keys.txt
 **/.obsidian
 **.log
-Assets
+__pycache__

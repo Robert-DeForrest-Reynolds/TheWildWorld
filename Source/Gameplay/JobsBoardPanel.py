@@ -1,7 +1,9 @@
 from discord import Embed, ButtonStyle, SelectOption
 from discord.ui import View, Button, Select
+
 from asyncio import create_task
-from WarningMessage import Warning_Message
+
+from Gameplay.Panel import Panel
 
 from Jobs.ChopOakTrees import ChopOakTrees
 from Jobs.SalmonFishing import SalmonFishing
@@ -12,20 +14,18 @@ from Jobs.HarvestWheat import HarvestWheat
 
 from Tools.JobsSelector import JobsSelector
 
-class JobsBoardPanel:
+from WarningMessage import Warning_Message
+
+class JobsBoardPanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, HoldPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
-            self.Context = Context
-            self.Player = Player
-            self.GivenInteraction = GivenInteraction
-            self.GlobalData = GlobalData
+            super().__init__(Context, Player, GlobalData)
             self.HoldPanel = HoldPanel
-            create_task(self.Construct_Panel())
+            create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
-    async def Construct_Panel(self):
-        self.BaseViewFrame = View(timeout=144000)
+    async def Construct_Panel(self, GivenInteraction):
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Job Board Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
@@ -65,7 +65,7 @@ class JobsBoardPanel:
         self.BaseViewFrame.add_item(self.Selection)
         self.BaseViewFrame.add_item(self.HoldPanelReturnButton)
 
-        await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Give_Job(self, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
@@ -76,8 +76,4 @@ class JobsBoardPanel:
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  SelectInteraction.user))
 
-    async def Reset(self, GivenInteraction):
-        if GivenInteraction.user.id == self.Context.author.id:
-            self.GivenInteraction = GivenInteraction
-            await self.Construct_Panel()
         

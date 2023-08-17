@@ -1,22 +1,22 @@
 from discord import Embed, ButtonStyle
 from discord.ui import View, Button, Modal, TextInput
+
 from asyncio import create_task
+
+from Gameplay.Panel import Panel
+
 from WarningMessage import Warning_Message
 
-class ProfilePanel:
+class ProfilePanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
-            self.Context = Context
-            self.Player = Player
-            self.GivenInteraction = GivenInteraction
-            self.GlobalData = GlobalData
+            super().__init__(Context, Player, GlobalData)
             self.PlayerPlayPanel = PlayerPlayPanel
-            create_task(self.Construct_Panel())
+            create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
-    async def Construct_Panel(self):
-        self.BaseViewFrame = View(timeout=144000)
+    async def Construct_Panel(self, GivenInteraction):
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Profile Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
 
@@ -42,7 +42,7 @@ class ProfilePanel:
         self.BaseViewFrame.add_item(self.PlayPanelReturnButton)
         self.BaseViewFrame.add_item(self.ChangeNicknameButton)
 
-        await self.GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
 
     async def Get_Nickname(self, ButtonInteraction):
         if ButtonInteraction.user.id == self.Context.author.id:

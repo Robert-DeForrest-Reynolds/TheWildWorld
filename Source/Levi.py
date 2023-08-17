@@ -60,12 +60,12 @@ async def Play_Command(Context):
     if Context.author.id in list(GlobalData.Players.keys()):
         if GlobalData.Players[Context.author.id].PanelOn == False:
             GlobalData.Logger.info(f"{Context.author} called for a panel")
-            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData)})
+            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData.Players[Context.author.id], GlobalData)})
             GlobalData.Players[Context.author.id].PanelOn = True
         else:
             await GlobalData.PlayerPanels[Context.author.id].Delete()
             del GlobalData.PlayerPanels[Context.author.id]
-            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData)})
+            GlobalData.PlayerPanels.update({Context.author.id:PlayPanel(Context, GlobalData.Players[Context.author.id], GlobalData)})
             GlobalData.Players[Context.author.id].PanelOn = True
     else:
         GlobalData.Logger.info(f"{Context.author} called for a panel, but broke something. Fuckin' hell.")
@@ -88,8 +88,12 @@ async def Stop_Bot_Properly(Context):
                 await Message.delete()
             except RateLimited:
                 continue
-    for PlayerID, Panel in GlobalData.PlayerPanels.items():
-        await Panel.Delete()
+    PlayerPanelsCopy = {PlayerID:Panel  for PlayerID, Panel in GlobalData.PlayerPanels.items()}
+    for PlayerID, Panel in PlayerPanelsCopy.items():
+        try:
+            await Panel.Delete()
+        except AttributeError:
+            print(GlobalData.PlayerPanels.items())
         del GlobalData.PlayerPanels[PlayerID]
     GlobalData.Logger.info("Finished cleaning up")
 

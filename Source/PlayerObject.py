@@ -34,10 +34,7 @@ class PlayerObject:
 
         self.Enclosures = {
             "Nets": 0,
-<<<<<<< Updated upstream
             "Aquatic Nets": 0,
-=======
->>>>>>> Stashed changes
             "Small Cages": 0,
             "Large Cages": 0,
             "Enormous Cages": 0,
