@@ -20,12 +20,12 @@ class CreatureSanctuaryPanel(Panel):
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Sanctuary Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
-        self.PetsPanelReturnButton = Button(label="Return to Pets Panel",
+        self.CreaturePanelReturnButton = Button(label="Return to Creature Panel",
                                             style=ButtonStyle.red,
                                             row=4)
 
-        self.PetsPanelReturnButton.callback = self.PlayerPetsPanel.Reset
+        self.CreaturePanelReturnButton.callback = self.PlayerCreaturePanel.Reset
 
-        self.BaseViewFrame.add_item(self.PetsPanelReturnButton)
+        self.BaseViewFrame.add_item(self.CreaturePanelReturnButton)
 
         await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)

@@ -9,7 +9,7 @@ from Gameplay.CreatureSanctuaryPanel import CreatureSanctuaryPanel
 
 from WarningMessage import Warning_Message
 
-class PetsPanel(Panel):
+class CreaturePanel:
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
@@ -19,14 +19,15 @@ class PetsPanel(Panel):
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
     async def Construct_Panel(self, GivenInteraction):
-        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Pets Panel",
+        self.BaseViewFrame = View(timeout=144000)
+        self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
         
         self.SelectionOptions = [SelectOption(label="Creature Collecting", description="Manage your containers and baits for creatures."),
                                  SelectOption(label="Creature Sanctuary", description="Interact with your creatures."),
         ]
         
-        self.Selection = Select(placeholder="Pet Actions",
+        self.Selection = Select(placeholder="Creature Actions",
                                 options=self.SelectionOptions)
         self.PlayPanelReturnButton = Button(label="Return to Play Panel",
                                             style=ButtonStyle.red,
