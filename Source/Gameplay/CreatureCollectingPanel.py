@@ -30,13 +30,13 @@ class CreatureCollectingPanel(Panel):
         ]
         
         self.Selection = Select(placeholder="Creature Collecting Actions", options=self.SelectionOptions)
-        self.PetsPanelReturnButton = Button(label="Return to Pets Panel", style=ButtonStyle.red)
+        self.CreaturePanelReturnButton = Button(label="Return to Creature Panel", style=ButtonStyle.red)
 
         self.Selection.callback = self.Create_Panel
-        self.PetsPanelReturnButton.callback = self.PlayerPetsPanel.Reset
+        self.CreaturePanelReturnButton.callback = self.PlayerCreaturePanel.Reset
 
         self.BaseViewFrame.add_item(self.Selection)
-        self.BaseViewFrame.add_item(self.PetsPanelReturnButton)
+        self.BaseViewFrame.add_item(self.CreaturePanelReturnButton)
 
         await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
         

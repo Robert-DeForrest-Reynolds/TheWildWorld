@@ -6,7 +6,7 @@ from asyncio import create_task
 from Gameplay.Panel import Panel
 from Gameplay.WorkPanel import WorkPanel
 from Gameplay.ProfilePanel import ProfilePanel
-from Gameplay.PetsPanel import PetsPanel
+from Gameplay.CreaturePanel import CreaturePanel
 from Gameplay.MarketPanel import MarketPanel
 from Gameplay.HoldPanel import HoldPanel
 from Gameplay.OfficePanel import OfficePanel
@@ -33,7 +33,7 @@ class PlayPanel(Panel):
         self.SelectionOptions = [SelectOption(label="Profile",description="See Character Stats & More"),
                                  SelectOption(label="Work",description="Get to work!"),
                                  SelectOption(label="Household",description="Take care of your household; your home, family, personal assets & more."),
-                                 SelectOption(label="Pets",description="Take care of some creatures. Some cute, some not."),
+                                 SelectOption(label="Creatures",description="Take care of some creatures. Some cute, some not."),
                                  SelectOption(label="Market",description="Trade things with other players."),
                                  SelectOption(label="Office",description="Manage your businesses."),
                                  SelectOption(label="Stocks",description="Invest in the public stocks"),
@@ -64,8 +64,8 @@ class PlayPanel(Panel):
                         SelectInteraction,
                         self,
                         self.GlobalData)
-            if PanelSelection == "Pets":
-                PetsPanel(self.Context,
+            if PanelSelection == "Creatures":
+                CreaturePanel(self.Context,
                         self.Player,
                         SelectInteraction,
                         self,

@@ -31,7 +31,7 @@ class ManageTrapsPanel(Panel):
                                      SelectOption(label="Divine Bait", description=self.Player.Baits["Divine Bait"]),
         ]
         self.EnclosureSelectMenuOptions = [SelectOption(label="Nets", description=self.Player.Enclosures["Nets"]),
-                                          SelectOption(label="Nets", description=self.Player.Enclosures["Aquatic Nets"]),
+                                          SelectOption(label="Aquatic Nets", description=self.Player.Enclosures["Aquatic Nets"]),
                                           SelectOption(label="Small Cage", description=self.Player.Enclosures["Small Cages"]),
                                           SelectOption(label="Large Cage", description=self.Player.Enclosures["Large Cages"]),
                                           SelectOption(label="Enormous Cage", description=self.Player.Enclosures["Enormous Cages"]),
