@@ -8,9 +8,11 @@ from Gameplay.Panel import Panel
 from WarningMessage import Warning_Message
 
 class ProfilePanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
+            self.ViewFrame = ViewFrame
+            self.EmbedFrame = EmbedFrame
             self.PlayerPlayPanel = PlayerPlayPanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
@@ -39,10 +41,10 @@ class ProfilePanel(Panel):
         self.ChangeNicknameButton.callback = self.Get_Nickname
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset
 
-        self.BaseViewFrame.add_item(self.PlayPanelReturnButton)
-        self.BaseViewFrame.add_item(self.ChangeNicknameButton)
+        self.ViewFrame.add_item(self.PlayPanelReturnButton)
+        self.ViewFrame.add_item(self.ChangeNicknameButton)
 
-        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
     async def Get_Nickname(self, ButtonInteraction):
         if ButtonInteraction.user.id == self.Context.author.id:
@@ -65,6 +67,6 @@ class ProfilePanel(Panel):
             Cursor.execute(f"UPDATE Players SET Nickname = ? WHERE UUID=?", (Nickname, self.Player.Profile['UUID']))
             self.GlobalData.Database.TWDCONNECTION.commit()
             Cursor.close()
-            await ModalInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+            await ModalInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  ModalInteraction.user))

@@ -9,9 +9,11 @@ from WarningMessage import Warning_Message
 
 
 class WorkPanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
+            self.ViewFrame = ViewFrame
+            self.EmbedFrame = EmbedFrame
             self.PlayerPlayPanel = PlayerPlayPanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
@@ -28,7 +30,7 @@ class WorkPanel(Panel):
                                             options=self.WorkSelectionOptions,
                                             custom_id="Work Selection")
                 self.WorkSelection.callback = self.Load_Selection
-                self.BaseViewFrame.add_item(self.WorkSelection)
+                self.ViewFrame.add_item(self.WorkSelection)
                 self.WorkSelectionOptions.append(SelectOption(label=JobName, 
                                                               description=JobObject.Description))
         else:
@@ -40,9 +42,9 @@ class WorkPanel(Panel):
         
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset
 
-        self.BaseViewFrame.add_item(self.PlayPanelReturnButton)
+        self.ViewFrame.add_item(self.PlayPanelReturnButton)
             
-        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
     async def Load_Selection(self, WorkSelectionInteraction):
         if WorkSelectionInteraction.user.id == self.Context.author.id:
@@ -50,19 +52,19 @@ class WorkPanel(Panel):
             self.WorkSelection.placeholder = WorkSelectionInteraction.data["values"][0]
             WorkButton = Button(label=self.WorkSelection.Name, custom_id="Work Button")
             WorkButton.callback = self.Work
-            if WorkButton not in self.BaseViewFrame.children:
-                self.BaseViewFrame.add_item(WorkButton)
+            if WorkButton not in self.ViewFrame.children:
+                self.ViewFrame.add_item(WorkButton)
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  WorkSelectionInteraction.user))
 
-        await WorkSelectionInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await WorkSelectionInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
     async def Work(self, ButtonInteraction):
         if ButtonInteraction.user.id == self.Context.author.id:
             Result = await self.WorkSelection.Harvest(self.Player)
             self.EmbedFrame.clear_fields()
             self.EmbedFrame.insert_field_at(0, name="Successful Harvest", value=Result[1])
-            await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+            await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
             self.GlobalData.Logger.info(f"{self.Player.Profile['Username']} successfully harvested from {self.WorkSelection.Name} {Result[1]} {self.WorkSelection.OutputItem}")
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  ButtonInteraction.user))

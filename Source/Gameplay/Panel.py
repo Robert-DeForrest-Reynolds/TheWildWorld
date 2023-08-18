@@ -5,13 +5,11 @@ from discord.ui import View
 
 class Panel:
     def __init__(self, Context, Player, GlobalData):
-        self.BaseViewFrame = View(timeout=12)
-        self.EmbedFrame = Embed()
-        self.BaseViewFrame.on_timeout = self.TimeoutDelete
         self.Context = Context
         self.Player = Player
         self.GlobalData = GlobalData
 
+    
     async def TimeoutDelete(self):
         try:
             self.Player.PanelOn = False
@@ -19,7 +17,10 @@ class Panel:
                 await self.PanelMessage.delete()
             except:
                 print("Failed to delete panel message for some reason")
-            self.GlobalData.PlayerPanels.pop(self.Player.Profile["UUID"])
+            try:
+                self.GlobalData.PlayerPanels.pop(self.Player.Profile["UUID"])
+            except:
+                print("Failed to pop player for some reason.")
         except errors.NotFound:
             self.GlobalData.Logger.info("Panel already deleted, timeout useless.")
 
@@ -35,5 +36,5 @@ class Panel:
             await self.Construct_Panel(ButtonInteraction)
     
     async def Cleanup(self):
-        if len(self.BaseViewFrame.children) >= 1:
-            self.BaseViewFrame.clear_items()
+        if len(self.ViewFrame.children) >= 1:
+            self.ViewFrame.clear_items()

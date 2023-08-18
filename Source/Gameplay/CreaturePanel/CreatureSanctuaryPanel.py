@@ -8,10 +8,10 @@ from Gameplay.Panel import Panel
 from WarningMessage import Warning_Message
 
 class CreatureSanctuaryPanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, PlayerPetsPanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, PlayerCreaturePanel, GlobalData):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
-            self.PlayerPetsPanel = PlayerPetsPanel
+            self.PlayerCreaturePanel = PlayerCreaturePanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
