@@ -24,7 +24,7 @@ class PlayPanel(Panel):
         create_task(self.Construct_Panel(GivenInteraction))
 
     async def Construct_Panel(self, GivenInteraction):
-        await self.Cleanup()
+        self.Clear()
         try:
             await self.Context.message.delete()
         except:
@@ -59,8 +59,6 @@ class PlayPanel(Panel):
 
     async def Create_Panel(self, PanelSelection, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
-            self.ViewFrame.clear_items()
-            self.EmbedFrame.clear_fields()
             self.ViewFrame.timeout = 144000
             if PanelSelection == "Profile":
                 self.Panels.update({"Profile Panel":ProfilePanel(self.Context,
@@ -70,7 +68,6 @@ class PlayPanel(Panel):
                                                                  self.GlobalData,
                                                                  self.ViewFrame,
                                                                  self.EmbedFrame)})
-                
             if PanelSelection == "Work":
                 self.Panels.update({"Work Panel":WorkPanel(self.Context,
                                                            self.Player,

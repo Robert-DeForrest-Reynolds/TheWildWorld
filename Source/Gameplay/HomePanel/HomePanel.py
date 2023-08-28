@@ -19,6 +19,7 @@ class HomePanel(Panel):
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
     async def Construct_Panel(self, GivenInteraction):
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Home Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     

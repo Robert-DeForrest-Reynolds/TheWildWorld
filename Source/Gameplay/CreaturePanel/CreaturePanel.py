@@ -9,7 +9,7 @@ from Gameplay.CreaturePanel.CreatureSanctuaryPanel import CreatureSanctuaryPanel
 
 from WarningMessage import Warning_Message
 
-class CreaturePanel:
+class CreaturePanel(Panel):
     def __init__(self, Context, Player, GivenInteraction, PlayerPlayPanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
@@ -21,7 +21,7 @@ class CreaturePanel:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
     async def Construct_Panel(self, GivenInteraction):
-        self.ViewFrame = View(timeout=144000)
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
         
@@ -52,17 +52,16 @@ class CreaturePanel:
                                         self.Player,
                                         SelectInteraction,
                                         self,
-                                        self.GlobalData)
+                                        self.GlobalData,
+                                        self.ViewFrame,
+                                        self.EmbedFrame)
             elif self.SelectedPanel == "Creature Sanctuary":
                 CreatureSanctuaryPanel(self.Context,
                                        self.Player,
                                        SelectInteraction,
                                        self,
-                                       self.GlobalData)
+                                       self.GlobalData,
+                                        self.ViewFrame,
+                                        self.EmbedFrame)
         
-        
-    async def Reset(self, ButtonInteraction):
-        if ButtonInteraction.user.id == self.Context.author.id:
-            GivenInteraction = ButtonInteraction
-            await self.Construct_Panel()
         

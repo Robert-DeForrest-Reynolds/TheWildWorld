@@ -36,29 +36,29 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [x] Day Save Load
 - [x] Player Jobs Board Panel
 - [x] Clean up function for deleting Levi's messages, and any active panels
-- [ ] Player Job Permits
+- [x] Player Job Permits
 - [ ] Player Job Permit Obtaining Logging
-- [ ] Player Job Permit Data Saving
-- [ ] Player Job Permit Data Loading
+- [x] Player Job Permit Data Saving
+- [x] Player Job Permit Data Loading
 - [ ] Player Inventory Data Saving
 - [ ] Player Inventory Data Loading
 - [ ] Object Patent Panel
 - [ ] Object Patent Panel Collection
 - [ ] Object Patent Panel Request Submitting
 - [ ] Object Patent Panel Logging
-- [ ] Reconnect on Disconnect for Cleanup
-- [ ] Find Way to Clear Panels On Bot Getting Turned Off
+- [x] Reconnect on Disconnect for Cleanup
+- [x] Find Way to Clear Panels On Bot Getting Turned Off
 - [x] Work Panel
 - [x] Work Panel Selection
 - [x] Work Button
 - [x] Work Button Logging
-- [ ] Player Profile Panel -> Inventory Panel
+- [x] Player Profile Panel -> Inventory Panel
 - [ ] Player Market Panel
 - [ ] Player Market Selling, The Hold always buys things
 - [ ] Player Market Buying, The Hold has a rotating stock of items being sold
-- [ ] Player Hunger, goes down when you work, or do actions, goes up while resting
+- [ ] Player Hunger, goes up when you work, or do actions
 - [ ] Player Eating
-- [ ] Player Thirst, goes down when you work or do actions, goes up while resting
+- [ ] Player Thirst, goes up when you work or do actions
 - [ ] Player Drinking
 - [x] Clear Logs Command
 - [x] Day Count
@@ -67,9 +67,6 @@ Welcome to The Wild World, a Discord bot that allows you to interact with a virt
 - [ ] Business Panel
 - [ ] Business Panel Start Business
 - [ ] Business Panel Sell Stock from Stock Market Requests
-- [ ] Stock Market Panel
-- [ ] Stock Market Buy Stock
-- [ ] Stock Market Sell Stock
 
 I'd like [[Lani]] to make a roadmap here of the pets for 1.0 release. Simply put, what is expected for 1.0 release is something functional that is still what you'd deem playable, with a gameplay loop. I'll start by adding a few things, and let you go from there. I recommend making a good list for you to tackle, and then adding more, and tackling them in groups. Anything put on this list will be expected in the 1.0 release. If there are things you do not think can be implemented timely, that aren't required for the core gameplay loop, just put them here: [[The Wild World Taming]], and focus on the 1.0 release. Word should be concise, but not necessarily vague, I just tend to be vague. You can word them however you'd like.
 

@@ -11,9 +11,11 @@ from Gameplay.CreaturePanel.ManageTrapsPanel import ManageTrapsPanel
 from WarningMessage import Warning_Message
 
 class CreatureCollectingPanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, PlayerCreaturePanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, PlayerCreaturePanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
+            self.ViewFrame = ViewFrame
+            self.EmbedFrame = EmbedFrame
             self.PlayerCreaturePanel = PlayerCreaturePanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
@@ -21,6 +23,7 @@ class CreatureCollectingPanel(Panel):
 
 
     async def Construct_Panel(self, GivenInteraction):
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Creature Collecting Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
@@ -35,10 +38,10 @@ class CreatureCollectingPanel(Panel):
         self.Selection.callback = self.Create_Panel
         self.CreaturePanelReturnButton.callback = self.PlayerCreaturePanel.Reset
 
-        self.BaseViewFrame.add_item(self.Selection)
-        self.BaseViewFrame.add_item(self.CreaturePanelReturnButton)
+        self.ViewFrame.add_item(self.Selection)
+        self.ViewFrame.add_item(self.CreaturePanelReturnButton)
 
-        self.Message = await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        self.Message = await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
         
         
     async def Create_Panel(self, SelectInteraction):
@@ -50,18 +53,24 @@ class CreatureCollectingPanel(Panel):
                                         self.Player,
                                         SelectInteraction,
                                         self,
-                                        self.GlobalData)
+                                        self.GlobalData,
+                                        self.ViewFrame,
+                                        self.EmbedFrame)
             elif self.SelectedPanel == "Manage Enclosures":
                 ManageEnclosuresPanel(self.Context,
                                         self.Player,
                                         SelectInteraction,
                                         self,
-                                        self.GlobalData)
+                                        self.GlobalData,
+                                        self.ViewFrame,
+                                        self.EmbedFrame)
             elif self.SelectedPanel == "Manage Traps":
                 ManageTrapsPanel(self.Context,
                                         self.Player,
                                         SelectInteraction,
                                         self,
-                                        self.GlobalData)
+                                        self.GlobalData,
+                                        self.ViewFrame,
+                                        self.EmbedFrame)
                 
                 

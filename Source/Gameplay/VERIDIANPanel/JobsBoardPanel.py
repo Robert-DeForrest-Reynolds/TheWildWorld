@@ -17,15 +17,18 @@ from Tools.JobsSelector import JobsSelector
 from WarningMessage import Warning_Message
 
 class JobsBoardPanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, HoldPanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, HoldPanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
+            self.ViewFrame = ViewFrame
+            self.EmbedFrame = EmbedFrame
             self.HoldPanel = HoldPanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
     async def Construct_Panel(self, GivenInteraction):
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Job Board Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
@@ -62,17 +65,24 @@ class JobsBoardPanel(Panel):
         self.Selection.callback = self.Give_Job
         self.HoldPanelReturnButton.callback = self.HoldPanel.Reset
 
-        self.BaseViewFrame.add_item(self.Selection)
-        self.BaseViewFrame.add_item(self.HoldPanelReturnButton)
+        self.ViewFrame.add_item(self.Selection)
+        self.ViewFrame.add_item(self.HoldPanelReturnButton)
 
-        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
     async def Give_Job(self, SelectInteraction):
         if SelectInteraction.user.id == self.Context.author.id:
-            self.SelectedJob = SelectInteraction.data['values'][0]
-            self.Player.Jobs.update({self.SelectedJob:JobsSelector[self.SelectedJob]})
-            print(self.Player.Jobs)
-            await self.Reset(SelectInteraction)
+            if "OBTAINED" not in SelectInteraction.data['values'][0]:
+                self.SelectedJob = SelectInteraction.data['values'][0]
+                Job = JobsSelector[self.SelectedJob]()
+                self.Player.Jobs.update({self.SelectedJob:Job})
+                print(self.Player.Jobs)
+                Cursor = self.GlobalData.Database.Generate_Cursor()
+                Cursor.execute("INSERT INTO Jobs(JobUUID, OwnerUUID, Name, TerminationDate) VALUES(?, ?, ?, ?)", (Job.UUID, self.Player.Profile["UUID"], Job.Name, Job.TerminationDate))
+                self.GlobalData.Database.TWDCONNECTION.commit()
+                await self.Reset(SelectInteraction)
+            else:
+                self.Reset()
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  SelectInteraction.user))
 

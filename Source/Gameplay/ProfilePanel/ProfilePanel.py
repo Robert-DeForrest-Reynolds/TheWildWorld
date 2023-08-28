@@ -4,6 +4,7 @@ from discord.ui import View, Button, Modal, TextInput
 from asyncio import create_task
 
 from Gameplay.Panel import Panel
+from Gameplay.ProfilePanel.InventoryPanel import InventoryPanel
 
 from WarningMessage import Warning_Message
 
@@ -19,6 +20,7 @@ class ProfilePanel(Panel):
             create_task(Warning_Message(self.GlobalData, Context.author,  GivenInteraction.user))
 
     async def Construct_Panel(self, GivenInteraction):
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Profile Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
 
@@ -36,13 +38,16 @@ class ProfilePanel(Panel):
         self.EmbedFrame.add_field(name="Stats", value=self.ProfileInfo)
 
         self.ChangeNicknameButton = Button(label="Change Nickname", style=ButtonStyle.blurple, row=3)
+        self.InventoryButton = Button(label="Inventory", style=ButtonStyle.blurple, row=3)
         self.PlayPanelReturnButton = Button(label="Return to Play Panel", style=ButtonStyle.red, row=4)
 
         self.ChangeNicknameButton.callback = self.Get_Nickname
+        self.InventoryButton.callback = self.Construct_Inventory_Panel
         self.PlayPanelReturnButton.callback = self.PlayerPlayPanel.Reset
 
-        self.ViewFrame.add_item(self.PlayPanelReturnButton)
         self.ViewFrame.add_item(self.ChangeNicknameButton)
+        self.ViewFrame.add_item(self.InventoryButton)
+        self.ViewFrame.add_item(self.PlayPanelReturnButton)
 
         await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
@@ -70,3 +75,12 @@ class ProfilePanel(Panel):
             await ModalInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
         else:
             create_task(Warning_Message(self.GlobalData, self.Context.author,  ModalInteraction.user))
+
+    async def Construct_Inventory_Panel(self, ButtonInteraction):
+        InventoryPanel(self.Context,
+                       self.Player,
+                       ButtonInteraction,
+                       self,
+                       self.GlobalData,
+                       self.ViewFrame,
+                       self.EmbedFrame)

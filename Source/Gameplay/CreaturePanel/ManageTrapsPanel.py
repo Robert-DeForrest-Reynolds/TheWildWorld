@@ -10,9 +10,11 @@ from Objects.Trap import Trap
 from WarningMessage import Warning_Message
 
 class ManageTrapsPanel(Panel):
-    def __init__(self, Context, Player, GivenInteraction, CreatureCollectingPanel, GlobalData):
+    def __init__(self, Context, Player, GivenInteraction, CreatureCollectingPanel, GlobalData, ViewFrame, EmbedFrame):
         if GivenInteraction.user.id == Context.author.id:
             super().__init__(Context, Player, GlobalData)
+            self.ViewFrame = ViewFrame
+            self.EmbedFrame = EmbedFrame
             self.CreatureCollectingPanel = CreatureCollectingPanel
             create_task(self.Construct_Panel(GivenInteraction))
         else:
@@ -20,6 +22,7 @@ class ManageTrapsPanel(Panel):
 
 
     async def Construct_Panel(self, GivenInteraction):
+        self.Clear()
         self.EmbedFrame = Embed(title=f"{self.Player.Profile['Nickname']}'s Manage Traps Panel",
                                 description=f"aka {self.Player.Profile['Username']}")
     
@@ -47,28 +50,28 @@ class ManageTrapsPanel(Panel):
         self.LayTrapButton.callback = self.Lay_Trap
         self.CreatureCollectingPanelReturnButton.callback = self.CreatureCollectingPanel.Reset
 
-        self.BaseViewFrame.add_item(self.BaitSelectMenu)
-        self.BaseViewFrame.add_item(self.EnclosureSelectMenu)
-        self.BaseViewFrame.add_item(self.LayTrapButton)
-        self.BaseViewFrame.add_item(self.CreatureCollectingPanelReturnButton)
+        self.ViewFrame.add_item(self.BaitSelectMenu)
+        self.ViewFrame.add_item(self.EnclosureSelectMenu)
+        self.ViewFrame.add_item(self.LayTrapButton)
+        self.ViewFrame.add_item(self.CreatureCollectingPanelReturnButton)
 
-        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await GivenInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
         
     async def Select_Bait(self, SelectInteraction):
         self.SelectedBait = SelectInteraction.data["values"][0]
         self.BaitSelectMenu.placeholder = self.SelectedBait
 
-        await SelectInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await SelectInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
 
     async def Select_Enclosure(self, SelectInteraction):
         self.SelectedEnclosure = SelectInteraction.data["values"][0]
         self.EnclosureSelectMenu.placeholder = self.SelectedEnclosure
         
-        await SelectInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await SelectInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)
         
     async def Lay_Trap(self, ButtonInteraction):
         self.Player.Traps.update({f"{self.SelectedBait} - {self.SelectedEnclosure}" : Trap(f"{self.SelectedBait} - {self.SelectedEnclosure}")})
         print(self.Player.Traps)
         self.EmbedFrame.clear_fields()
         self.EmbedFrame.add_field(name="Successfully laid trap", value=f"Trap laid: {self.SelectedBait} - {self.SelectedEnclosure}")
-        await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.BaseViewFrame)
+        await ButtonInteraction.response.edit_message(embed=self.EmbedFrame, view=self.ViewFrame)

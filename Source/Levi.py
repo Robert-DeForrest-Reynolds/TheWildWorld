@@ -48,9 +48,10 @@ async def on_ready():
 
     GlobalData.Database = TWD(GlobalData)
 
-    GlobalData.Players = GlobalData.Database.Load_Players(GlobalData)
+    GlobalData.Players = GlobalData.Database.Load_Players()
+    GlobalData.Database.Load_Player_Jobs()
 
-    GlobalData.Database.Save_Global_Data(GlobalData)
+    GlobalData.Database.Save_Global_Data()
 
     WS = WorldSimulation(GlobalData)
 

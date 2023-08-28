@@ -9,6 +9,7 @@ class PlayerObject:
         self.Inventory = {}
         self.Jobs = {}
         self.PanelOn = False
+        self.WarehouseCount = 1
         self.ProfileCreationDate = int(time())
 
         self.Profile = {

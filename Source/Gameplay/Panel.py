@@ -8,8 +8,11 @@ class Panel:
         self.Context = Context
         self.Player = Player
         self.GlobalData = GlobalData
+        
+    def Clear(self):
+        self.ViewFrame.clear_items()
+        self.EmbedFrame.clear_fields()
 
-    
     async def TimeoutDelete(self):
         try:
             self.Player.PanelOn = False
@@ -34,7 +37,3 @@ class Panel:
     async def Reset(self, ButtonInteraction):
         if ButtonInteraction.user.id == self.Context.author.id:
             await self.Construct_Panel(ButtonInteraction)
-    
-    async def Cleanup(self):
-        if len(self.ViewFrame.children) >= 1:
-            self.ViewFrame.clear_items()
