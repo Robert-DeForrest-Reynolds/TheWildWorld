@@ -3,10 +3,10 @@ if __name__ != "__main__": exit()
 
 
 from EverburnLauncher.Library.EverburnBot import EverburnBot
-from EverburnLauncher.Library.Dashboard import Dashboard
+from EverburnLauncher.Library.Panel import Panel
 
 TheWildWorld:EverburnBot = EverburnBot()
-TheWildWorld.Dashboard = Dashboard
+TheWildWorld.Panel = Panel
 TheWildWorld.Bot.run(TheWildWorld.Token)
 
 TheWildWorld.Output("stopped")
